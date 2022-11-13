@@ -16,13 +16,9 @@
 
 <body style="background-color:rgb(0, 0, 0);">
 
+    <h1 style="text-align:center;">Capture The Campus</h1>
 
-    <div id="header">
-
-        <!--  Title for the top of the page-->
-        <h1 style="text-align:center;">Capture The Campus</h1>
-
-    </div>
+    
 
 
 
@@ -31,7 +27,7 @@
     <!--  Main Site, to contain a welcome screen with an explination on how to play-->
     <div id="mainpage" style="background-color:rgb(0, 0, 0);border: 5px solid #000000 ">
 
-        <button onclick="getLocation()">Get Location</button>
+       <!--  <button onclick="getLocation()">Get Location</button> -->
 
 
         <p id="demo" style="background-color:rgb(255, 255, 255);border: 5px solid #000000 "></p>
@@ -44,7 +40,7 @@
 
 
 </body>
-
+ <!--
 <script>
     var x = document.getElementById("demo");
     function getLocation() {
@@ -60,6 +56,23 @@
       "<br>Longitude: " + position.coords.longitude;
     }
 </script>
+ -->
+<script>
+    //var loop = setInterval(test, 1000);
+    setInterval(test, 1000);
+
+    
+    function test(){
+        getText("http://website.com/webpage.php");
+    }
+
+
+    async function getText(file) {
+      let myObject = await fetch(file);
+      let myText = await myObject.text();
+      document.getElementById("demo").innerHTML = myText;
+    }
+    </script>
 
 
 </html>
