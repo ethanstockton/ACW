@@ -8,9 +8,17 @@
 
 
     <style>
-        
+        #map { height: 80vh; }
 
     </style>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
+crossorigin=""/>
+
+<script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
+crossorigin=""></script>
 
 </head>
 
@@ -34,12 +42,13 @@
     </div>
     <!-- End Of Main Site -->
 
-    
+    <div id="map"></div>
 
 
 </body>
  
 <script>
+    /*
     var x = document.getElementById("demo");
     function getLocation() {
       if (navigator.geolocation) {
@@ -56,6 +65,34 @@
 
     //var loop = setInterval(test, 1000);
     setInterval(getLocation, 1000);
+*/
+
+
+    function setLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPositionmap);
+      } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+      }
+    }
+    function showPositionmap(position) {
+      //x.innerHTML = "Latitude: " + position.coords.latitude +
+      //"<br>Longitude: " + position.coords.longitude;
+      var map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 13);
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+    }
+
+    setLocation();
+    //var map = L.map('map').setView([51.505, -0.09], 13);
+
+    
+
+
 
     /*
     function test(){
