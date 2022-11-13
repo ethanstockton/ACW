@@ -48,7 +48,9 @@ crossorigin=""></script>
 </body>
  
 <script>
-    /*
+    
+    var map;
+
     var x = document.getElementById("demo");
     function getLocation() {
       if (navigator.geolocation) {
@@ -61,11 +63,15 @@ crossorigin=""></script>
     function showPosition(position) {
       x.innerHTML = "Latitude: " + position.coords.latitude +
       "<br>Longitude: " + position.coords.longitude;
+
+      if(map != null){
+        var user = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+      }
     }
 
     //var loop = setInterval(test, 1000);
     setInterval(getLocation, 1000);
-*/
+
 
 
     function setLocation() {
@@ -78,7 +84,7 @@ crossorigin=""></script>
     function showPositionmap(position) {
       //x.innerHTML = "Latitude: " + position.coords.latitude +
       //"<br>Longitude: " + position.coords.longitude;
-      var map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 13);
+      map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 13);
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
