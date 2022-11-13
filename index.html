@@ -68,13 +68,15 @@ crossorigin=""></script>
       if(map != null){
 
         if(user != null){
-            user.marker.setLatLng([position.coords.latitude, position.coords.longitude]);
+            user.setLatLng([position.coords.latitude, position.coords.longitude]);
         }
-        else{
+        if(user == null){
+            user = L.marker([position.coords.latitude, position.coords.longitude]);
+            user.addTo(map);
+            
+        }
 
         
-             user = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
-        }
       }
     }
 
