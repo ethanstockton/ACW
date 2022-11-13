@@ -50,6 +50,7 @@ crossorigin=""></script>
 <script>
     
     var map;
+    var user;
 
     var x = document.getElementById("demo");
     function getLocation() {
@@ -65,7 +66,15 @@ crossorigin=""></script>
       "<br>Longitude: " + position.coords.longitude;
 
       if(map != null){
-        var user = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+
+        if(user != null){
+            user.marker.setLatLng([position.coords.latitude, position.coords.longitude]);
+        }
+        else{
+
+        
+             user = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+        }
       }
     }
 
