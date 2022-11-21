@@ -52,7 +52,10 @@ crossorigin=""></script>
     var map;
     var user;
 
+    var users = [];
+
     var x = document.getElementById("demo");
+
     function getLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
@@ -81,7 +84,7 @@ crossorigin=""></script>
     }
 
     //var loop = setInterval(test, 1000);
-    setInterval(getLocation, 1000);
+    //setInterval(getLocation, 1000);
 
 
 
@@ -102,26 +105,342 @@ crossorigin=""></script>
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
+        
+
     }
 
     setLocation();
     //var map = L.map('map').setView([51.505, -0.09], 13);
 
     
+//map.removeLayer(marker);
+
+
+    
+
+    function getResponse(xhttp) {
+	    let response = xhttp.response;
+
+      console.log(response);
+
+      var lines = response.split(/\r?\n|\r|\n/g);
+               // var lines = response.match(/[^\r\n]+/g);
+
+				
+				
+      for (i = 0; i < lines.length; i++) {
+				
+				
+				
+					
+					
+      }
+				
+				
+				
+	}
 
 
 
-    /*
-    function test(){
-        getText("http://website.com/webpage.php");
+//loadDoc('https://uniserver.ethanrws.com/.php', getResponse);
+
+
+
+function loadDoc(url, cFunction) {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {cFunction(this);}
+  xhttp.open("GET", url);
+  xhttp.send();
+}
+
+
+
+
+
+
+
+//run every 1000 ms
+//game loop 
+setInterval(GameLoop, 1000);
+
+var userid;
+var username;
+var userlocation;
+
+//[position.coords.latitude, position.coords.longitude]
+
+
+var newusertimeout = 6;
+
+
+
+function GameLoop() {
+
+
+  //first do the local player stuff
+  if(1 == 1){
+
+      //first fetch the local players location
+      getLocation2();
+      
+      if(userid == null){
+        //check for a cookie
+        var returncookieuserid = "";// = getCookie("userid");
+
+        if(returncookieuserid == ""){
+          //then send a load command to the server to get a user id and a player name
+          if(newusertimeout > 5){
+            loadnewuser();
+            newusertimeout = 0;
+          }
+          newusertimeout++;
+          
+          
+        }
+        else{
+          userid = returncookieuserid;
+          username = "Player" . returncookieuserid;
+        }
+
+        //the id and username should now be set either by the cookie or by getting a new userid
+
+      }
+      else{
+
+        //if the user id isn't null then the local player can sent the id and location, to the server in order to update them on the server side
+        setuserlocation();
+
+
+
+      }
+
+
+  }
+  
+
+  //then do the external stuff
+  //load the players onto the map
+  //
+  if(1 == 1){
+    
+
+    //set a check for each user, so that it can be seen as offline if not updated
+    users.forEach(user => {
+      user[3] = 0;
+    });
+
+
+    users.forEach(user => {
+      
+      console.log(user);
+    });
+    
+    
+    //get all the users and their locations, then load them onto the map
+    
+
+
+     loaduserlocations();
+
+
+
+
+//remove all the users from the map that are not on the location list
+     users.forEach(user => {
+      if(user[3] == 0){
+          map.removeLayer(user);
+          users.pop(user);
+      }
+     
+    });
+  }
+
+}
+
+
+
+
+
+function loaduserlocations() {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {loaduserlocationsreturn(this);}
+  xhttp.open("GET", 'https://uniserver.ethanrws.com/getlocations.php');
+  xhttp.send();
+}
+
+function loaduserlocationsreturn(xhttp) {
+	    let response = xhttp.response;
+
+      //console.log(response);
+
+      var lines = response.split(/\r?\n|\r|\n/g);
+      //console.log(lines);    
+             
+      if(lines[0] != ""){
+
+          for (i = 1; i < lines.length; i++) {
+             var line = lines[i].split('|');
+            
+
+             var id = line[0];
+             var playername = line[1];
+             var location = line[2];
+
+
+
+
+             //check to see if the location is defined
+             if(location != "undefined"){
+              var location2 = location.replace("[", "");
+              var location3 = location2.replace("]", "");
+              var location4 = location3.split(',');
+              //console.log(location4);
+
+              //check to see if there is already a player with that id
+              var isalreadyuser = 0;
+              var isalreadyuseruser;
+              users.forEach(user => {
+                if(user[1] == id){
+                  isalreadyuser = 1;
+                  isalreadyuseruser = user;
+                  
+                }
+     
+              });
+
+              if(isalreadyuser == 1){
+                  //then just update the location
+                  isalreadyuseruser[0].setLatLng([location4[0], location4[1] ]);
+                  isalreadyuseruser[2] = location;
+                  isalreadyuseruser[3] = 1;
+              }
+              else{
+
+              
+
+              
+              
+
+              user2 = L.marker([location4[0], location4[1] ]);
+              user2.bindPopup("<b>" + playername + "</b>").openPopup();
+              user2.addTo(map);
+              
+              var user = [];
+              user.push(user2);
+              user.push(id);
+              user.push(location);
+              user.push(1);
+              users.push(user);
+              }
+             }
+           }
+       }
+				
+	}
+
+
+
+
+function loadnewuser() {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {loadnewuserreturn(this);}
+  xhttp.open("POST", 'https://uniserver.ethanrws.com/createplayer.php?location=[0, -0]');
+  xhttp.send();
+}
+
+function loadnewuserreturn(xhttp) {
+	    let response = xhttp.response;
+
+      //console.log(response);
+
+      var lines = response.split(/\r?\n|\r|\n/g);
+               // var lines = response.match(/[^\r\n]+/g);
+
+               console.log(lines[0]);
+              if(lines[0] == "ok"){
+                  userid = lines[1];
+                 username = lines[2];
+
+                 console.log("userid:" + userid);
+                 console.log("username:" + username);
+
+
+                // setCookie("userid", userid, 365);
+              }
+              
+				/*
+      for (i = 0; i < lines.length; i++) {
+      }
+				*/	
+	}
+
+
+  function setuserlocation() {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {setuserlocationreturn(this);}
+  xhttp.open("POST", 'https://uniserver.ethanrws.com/updatelocation.php?id=' + userid + '&location=' + userlocation +'');
+  xhttp.send();
+}
+
+function setuserlocationreturn(xhttp) {
+	    let response = xhttp.response;
+
+      console.log(response);
+
+	}
+
+
+  function getLocation2() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition2);
+      } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+      }
+    }
+    
+    function showPosition2(position) {
+      
+      userlocation = "[" + position.coords.latitude + "," + position.coords.longitude + "]"; 
+        console.log(userlocation);
     }
 
 
-    async function getText(file) {
-      let myObject = await fetch(file);
-      let myText = await myObject.text();
-      document.getElementById("demo").innerHTML = myText;
-    }*/
+
+
+
+
+
+
+
+
+
+
+
+/*
+//cookie stuff from w3 schools
+function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  let expires = "expires="+d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let ca = document.cookie.split(';');
+  for(let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+*/
 
 </script>
 
