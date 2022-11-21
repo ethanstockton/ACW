@@ -50,6 +50,8 @@ crossorigin=""></script>
 <script>
     
     var map;
+
+    var maplayer;
     //var user;
 
     var users = [];
@@ -98,6 +100,8 @@ crossorigin=""></script>
     function showPositionmap(position) {
       //x.innerHTML = "Latitude: " + position.coords.latitude +
       //"<br>Longitude: " + position.coords.longitude;
+      
+
       map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 13);
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -105,8 +109,8 @@ crossorigin=""></script>
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
+ 
         
-
     }
 
     setLocation();
@@ -279,11 +283,15 @@ function loaduserlocationsreturn(xhttp) {
              
       if(lines[0] != ""){
 
-        users.forEach(user => {
-      
-          map.removeLayer(user);
-          users.pop(user);
+        
+        
+          users.forEach(user => {
+            user.removeLayer();
+          
           });
+          users = [];
+          
+          
 
           for (i = 1; i < lines.length; i++) {
              var line = lines[i].split('|');
@@ -308,6 +316,7 @@ function loaduserlocationsreturn(xhttp) {
               user2 = L.marker([location4[0], location4[1] ]);
                user2.bindPopup("<b>" + playername + "</b>").openPopup();
                 user2.addTo(map);
+
                 users.push(user2);
                 
               /*
