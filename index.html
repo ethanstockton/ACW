@@ -223,7 +223,7 @@ function GameLoop() {
   //
   if(1 == 1){
     
-
+/*
     //set a check for each user, so that it can be seen as offline if not updated
     users.forEach(user => {
       user[3] = 0;
@@ -235,7 +235,7 @@ function GameLoop() {
       console.log(user);
     });
     
-    
+    */
     //get all the users and their locations, then load them onto the map
     
 
@@ -246,13 +246,14 @@ function GameLoop() {
 
 
 //remove all the users from the map that are not on the location list
+/*
      users.forEach(user => {
       if(user[3] == 0){
           map.removeLayer(user);
           users.pop(user);
       }
      
-    });
+    });*/
   }
 
 }
@@ -278,6 +279,12 @@ function loaduserlocationsreturn(xhttp) {
              
       if(lines[0] != ""){
 
+        users.forEach(user => {
+      
+          map.removeLayer(user);
+          users.pop(user);
+          });
+
           for (i = 1; i < lines.length; i++) {
              var line = lines[i].split('|');
             
@@ -291,49 +298,61 @@ function loaduserlocationsreturn(xhttp) {
 
              //check to see if the location is defined
              if(location != "undefined"){
+              try {
+                
               
               var location2 = location.replace('[', '');
               var location3 = location2.replace(']', '');
               var location4 = location3.split(',');
               //console.log(location4);
-
+              user2 = L.marker([location4[0], location4[1] ]);
+               user2.bindPopup("<b>" + playername + "</b>").openPopup();
+                user2.addTo(map);
+                users.push(user2);
+                
+              /*
               //check to see if there is already a player with that id
-              var isalreadyuser = 0;
+              var isalreadyuser = false;
               var isalreadyuseruser;
+              users.find()
               users.forEach(user => {
                 if(user[1] == id){
-                  isalreadyuser = 1;
+                  isalreadyuser = true;
                   isalreadyuseruser = user;
                   
                 }
      
-              });
+              });*/
+/*
+              var isalreadyuser = users.findIndex((user) => user[1]==id);
+              
+              
 
-              if(isalreadyuser == 1){
+              if(isalreadyuser != null){
                   //then just update the location
-                  isalreadyuseruser[0].setLatLng([location4[0], location4[1] ]);
-                  isalreadyuseruser[2] = location4;
-                  isalreadyuseruser[3] = 1;
+                  isalreadyuser[0].setLatLng([location4[0], location4[1] ]);
+                  //isalreadyuseruser[2] = location4;
+                  isalreadyuser[3] = 1;
               }
               else{
 
-              
-
-              
-              
-
-              user2 = L.marker([location4[0], location4[1] ]);
-              user2.bindPopup("<b>" + playername + "</b>").openPopup();
-              user2.addTo(map);
-              
-              var user = [];
-              user.push(user2);
-              user.push(id);
-              user.push(location4);
-              user.push(1);
-              users.push(user);
+                user2 = L.marker([location4[0], location4[1] ]);
+               user2.bindPopup("<b>" + playername + "</b>").openPopup();
+                user2.addTo(map);
+                const user = {id: id, marker: user2, check:1};
+                //var user = [];
+                //user.push(user2);
+                //user.push(id);
+                //user.push(location4);
+               //user.push(1);
+               users.push(user);
               }
-             }
+             */
+
+            } catch (error) {
+                
+              }
+            }
            }
        }
 				
