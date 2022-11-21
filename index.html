@@ -50,7 +50,7 @@ crossorigin=""></script>
 <script>
     
     var map;
-    var user;
+    //var user;
 
     var users = [];
 
@@ -63,7 +63,7 @@ crossorigin=""></script>
         x.innerHTML = "Geolocation is not supported by this browser.";
       }
     }
-    
+    /*
     function showPosition(position) {
       x.innerHTML = "Latitude: " + position.coords.latitude +
       "<br>Longitude: " + position.coords.longitude;
@@ -82,7 +82,7 @@ crossorigin=""></script>
         
       }
     }
-
+*/
     //var loop = setInterval(test, 1000);
     //setInterval(getLocation, 1000);
 
@@ -291,8 +291,9 @@ function loaduserlocationsreturn(xhttp) {
 
              //check to see if the location is defined
              if(location != "undefined"){
-              var location2 = location.replace("[", "");
-              var location3 = location2.replace("]", "");
+              
+              var location2 = location.replace('[', '');
+              var location3 = location2.replace(']', '');
               var location4 = location3.split(',');
               //console.log(location4);
 
@@ -311,7 +312,7 @@ function loaduserlocationsreturn(xhttp) {
               if(isalreadyuser == 1){
                   //then just update the location
                   isalreadyuseruser[0].setLatLng([location4[0], location4[1] ]);
-                  isalreadyuseruser[2] = location;
+                  isalreadyuseruser[2] = location4;
                   isalreadyuseruser[3] = 1;
               }
               else{
@@ -328,7 +329,7 @@ function loaduserlocationsreturn(xhttp) {
               var user = [];
               user.push(user2);
               user.push(id);
-              user.push(location);
+              user.push(location4);
               user.push(1);
               users.push(user);
               }
