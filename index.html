@@ -313,7 +313,7 @@ function loaduserlocationsreturn(xhttp) {
               var location3 = location2.replace(']', '');
               var location4 = location3.split(',');
               //console.log(location4);
-              user2 = L.marker([location4[0], location4[1] ]);
+              user2 = new L.marker([location4[0], location4[1] ]);
                user2.bindPopup("<b>" + playername + "</b>").openPopup();
                 user2.addTo(map);
 
