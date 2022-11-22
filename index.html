@@ -51,7 +51,7 @@ crossorigin=""></script>
     
     var map;
 
-    var maplayer;
+    var layerGroup;
     //var user;
 
     var users = [];
@@ -111,6 +111,8 @@ crossorigin=""></script>
 
  
         
+
+
     }
 
     setLocation();
@@ -284,12 +286,12 @@ function loaduserlocationsreturn(xhttp) {
       if(lines[0] != ""){
 
         
-        
+        /*
           users.forEach(user => {
-            user.remove();
+            //user.remove();
           
           });
-          users = [];
+          users = [];*/
           
           
 
@@ -313,11 +315,11 @@ function loaduserlocationsreturn(xhttp) {
               var location3 = location2.replace(']', '');
               var location4 = location3.split(',');
               //console.log(location4);
-              user2 = new L.marker([location4[0], location4[1] ]);
+              user2 = L.marker([location4[0], location4[1] ]);
                user2.bindPopup("<b>" + playername + "</b>").openPopup();
                 user2.addTo(map);
-
-                users.push(user2);
+                
+                //users.push(user2);
                 
               /*
               //check to see if there is already a player with that id
