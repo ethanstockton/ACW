@@ -5,7 +5,7 @@
 <head>
 
     <title>Capture The Campus</title>
-
+    <script type="text/javascript" src="js/PlayerObject.js"></script>
 
     <style>
         #map { height: 80vh; }
@@ -50,11 +50,12 @@ crossorigin=""></script>
 <script>
     
     var map;
-
-    var layerGroup;
     //var user;
 
     var users = [];
+
+    //create js objects to hold the marker, and other player info, this can then be used(with a check loop) to see if the 
+    //player is still online, and so that the player can be moved
 
     var x = document.getElementById("demo");
 
@@ -127,7 +128,7 @@ crossorigin=""></script>
     function getResponse(xhttp) {
 	    let response = xhttp.response;
 
-      console.log(response);
+      //console.log(response);
 
       var lines = response.split(/\r?\n|\r|\n/g);
                // var lines = response.match(/[^\r\n]+/g);
@@ -171,8 +172,9 @@ setInterval(GameLoop, 1000);
 
 var userid;
 var username;
-var userlocation;
-
+//var userlocation;
+var userlocationlatitude;
+var userlocationlongitude;
 //[position.coords.latitude, position.coords.longitude]
 
 
@@ -285,85 +287,44 @@ function loaduserlocationsreturn(xhttp) {
              
       if(lines[0] != ""){
 
-        
-        /*
-          users.forEach(user => {
-            //user.remove();
-          
-          });
-          users = [];*/
-          
-          
 
-          for (i = 1; i < lines.length; i++) {
+          for (i = 0; i < lines.length; i++) {
              var line = lines[i].split('|');
-            
+             console.log(line);
 
              var id = line[0];
              var playername = line[1];
-             var location = line[2];
+             var locationlat = line[2];
+             var locationlong = line[3];
+              var playeralreadyloaded = 0;
 
+            
 
-
-
-             //check to see if the location is defined
-             if(location != "undefined"){
-              //try {
-                
-              
-              var location2 = location.replace('[', '');
-              var location3 = location2.replace(']', '');
-              var location4 = location3.split(',');
-              //console.log(location4);
-              user2 = L.marker([location4[0], location4[1] ]);
-               user2.bindPopup("<b>" + playername + "</b>").openPopup();
-                user2.addTo(map);
-                
-                //users.push(user2);
-                
-              /*
-              //check to see if there is already a player with that id
-              var isalreadyuser = false;
-              var isalreadyuseruser;
-              users.find()
-              users.forEach(user => {
-                if(user[1] == id){
-                  isalreadyuser = true;
-                  isalreadyuseruser = user;
-                  
+             users.forEach(user => {
+               
+                if(user.getid() == id){
+                  playeralreadyloaded = 1;
+                  user.setlocation(map, locationlat,locationlong);
                 }
-     
-              });*/
-/*
-              var isalreadyuser = users.findIndex((user) => user[1]==id);
-              
-              
+          
+              });
+               
 
-              if(isalreadyuser != null){
-                  //then just update the location
-                  isalreadyuser[0].setLatLng([location4[0], location4[1] ]);
-                  //isalreadyuseruser[2] = location4;
-                  isalreadyuser[3] = 1;
-              }
-              else{
+              if(playeralreadyloaded == 0){
 
-                user2 = L.marker([location4[0], location4[1] ]);
-               user2.bindPopup("<b>" + playername + "</b>").openPopup();
-                user2.addTo(map);
-                const user = {id: id, marker: user2, check:1};
-                //var user = [];
-                //user.push(user2);
-                //user.push(id);
-                //user.push(location4);
-               //user.push(1);
-               users.push(user);
-              }
-             */
+                var newuser = new PlayerObject(id,playername);
 
-            //} catch (error) {
+               
+                newuser.setid(id);
+                newuser.setplayername(playername);
+                newuser.setlocation(map, locationlat,locationlong);
+
+                users.push(newuser);
                 
-              //}
+                
             }
+
+
            }
        }
 				
@@ -375,7 +336,7 @@ function loaduserlocationsreturn(xhttp) {
 function loadnewuser() {
   const xhttp = new XMLHttpRequest();
   xhttp.onload = function() {loadnewuserreturn(this);}
-  xhttp.open("POST", 'https://uniserver.ethanrws.com/createplayer.php?location=[0, -0]');
+  xhttp.open("POST", 'https://uniserver.ethanrws.com/createplayer.php?latitude=' + 0 + '&longitude=' + 0 +'');
   xhttp.send();
 }
 
@@ -387,13 +348,13 @@ function loadnewuserreturn(xhttp) {
       var lines = response.split(/\r?\n|\r|\n/g);
                // var lines = response.match(/[^\r\n]+/g);
 
-               console.log(lines[0]);
+               //console.log(lines[0]);
               if(lines[0] == "ok"){
                   userid = lines[1];
                  username = lines[2];
 
-                 console.log("userid:" + userid);
-                 console.log("username:" + username);
+                 //console.log("userid:" + userid);
+                 //console.log("username:" + username);
 
 
                 // setCookie("userid", userid, 365);
@@ -409,14 +370,14 @@ function loadnewuserreturn(xhttp) {
   function setuserlocation() {
   const xhttp = new XMLHttpRequest();
   xhttp.onload = function() {setuserlocationreturn(this);}
-  xhttp.open("POST", 'https://uniserver.ethanrws.com/updatelocation.php?id=' + userid + '&location=' + userlocation +'');
+  xhttp.open("POST", 'https://uniserver.ethanrws.com/updatelocation.php?id=' + userid + '&latitude=' + userlocationlatitude + '&longitude=' + userlocationlongitude +'');
   xhttp.send();
 }
 
 function setuserlocationreturn(xhttp) {
 	    let response = xhttp.response;
 
-      console.log(response);
+      //console.log(response);
 
 	}
 
@@ -431,8 +392,9 @@ function setuserlocationreturn(xhttp) {
     
     function showPosition2(position) {
       
-      userlocation = "[" + position.coords.latitude + "," + position.coords.longitude + "]"; 
-        console.log(userlocation);
+      userlocationlatitude = position.coords.latitude;
+      userlocationlongitude = position.coords.longitude;
+        //console.log(userlocation);
     }
 
 
