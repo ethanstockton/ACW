@@ -6,7 +6,7 @@ class PlayerObject {
         this.playername = pplayername;
         this.playershown;
         this.marker;// = pmarker;
-
+        this.check;
     }
 
     setid(pid){
@@ -36,7 +36,28 @@ class PlayerObject {
     getmarker(){
         return this.marker;
     }
+
+    resetcheck(){
+        this.check = 0;
+    }
+
+    setcheck(){
+        if(this.check == null){
+            this.check = 0;
+        }
+        this.check += 1;
+    } 
+    getcheck(){
+        return this.check;
+    }
     
+
+    hideplayer(map){
+        if(this.marker != null){
+            //this.marker.setLatLng([ -84.14293855385255, 4.353638734375012]);
+            map.removeLayer(this.marker);
+        }
+    }
 /*
     setlocationnew(pmap, location){
 

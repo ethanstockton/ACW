@@ -231,19 +231,16 @@ function GameLoop() {
   //
   if(1 == 1){
     
-/*
+
     //set a check for each user, so that it can be seen as offline if not updated
     users.forEach(user => {
-      user[3] = 0;
+      user.setcheck();
     });
 
 
-    users.forEach(user => {
-      
-      console.log(user);
-    });
     
-    */
+    
+    
     //get all the users and their locations, then load them onto the map
     
 
@@ -254,14 +251,13 @@ function GameLoop() {
 
 
 //remove all the users from the map that are not on the location list
-/*
+
      users.forEach(user => {
-      if(user[3] == 0){
-          map.removeLayer(user);
-          users.pop(user);
+      if(user.getcheck() >= 5){
+         user.hideplayer(map);
       }
      
-    });*/
+    });
   }
 
 }
@@ -304,6 +300,7 @@ function loaduserlocationsreturn(xhttp) {
                
                 if(user.getid() == id){
                   playeralreadyloaded = 1;
+                  user.resetcheck();
                   user.setlocation(map, locationlat,locationlong);
                 }
           
@@ -318,6 +315,7 @@ function loaduserlocationsreturn(xhttp) {
                 newuser.setid(id);
                 newuser.setplayername(playername);
                 newuser.setlocation(map, locationlat,locationlong);
+                newuser.setcheck(1);
 
                 users.push(newuser);
                 
