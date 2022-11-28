@@ -34,7 +34,8 @@ crossorigin=""></script>
 
     <!--  Main Site, to contain a welcome screen with an explination on how to play-->
     <div id="mainpage" style="background-color:rgb(0, 0, 0);border: 5px solid #000000 ">
-
+      <input type="button" value="RedTeam" onclick="setredteam()">
+      <input type="button" value="BlueTeam" onclick="setblueteam()">
        
         <p id="demo" style="background-color:rgb(255, 255, 255);border: 5px solid #000000 "></p>
 
@@ -177,6 +178,7 @@ var userlocationlatitude;
 var userlocationlongitude;
 //[position.coords.latitude, position.coords.longitude]
 
+var userteam = 0;
 
 var newusertimeout = 6;
 
@@ -218,7 +220,7 @@ function GameLoop() {
         //if the user id isn't null then the local player can sent the id and location, to the server in order to update them on the server side
         setuserlocation();
 
-
+        //setuserteam();
 
       }
 
@@ -292,6 +294,7 @@ function loaduserlocationsreturn(xhttp) {
              var playername = line[1];
              var locationlat = line[2];
              var locationlong = line[3];
+             var playerteam = line[4];
               var playeralreadyloaded = 0;
 
             
@@ -302,6 +305,7 @@ function loaduserlocationsreturn(xhttp) {
                   playeralreadyloaded = 1;
                   user.resetcheck();
                   user.setlocation(map, locationlat,locationlong);
+                  user.setteam(playerteam);
                 }
           
               });
@@ -315,6 +319,7 @@ function loaduserlocationsreturn(xhttp) {
                 newuser.setid(id);
                 newuser.setplayername(playername);
                 newuser.setlocation(map, locationlat,locationlong);
+                newuser.setteam(playerteam);
                 newuser.setcheck(1);
 
                 users.push(newuser);
@@ -396,10 +401,29 @@ function setuserlocationreturn(xhttp) {
     }
 
 
+function setredteam(){
+  userteam = 1;
+  setuserteam();
+}
+function setblueteam(){
+  userteam = 2;
+  setuserteam();
+}
 
 
+    function setuserteam() {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {setuserteam2(this);}
+  xhttp.open("POST", 'https://uniserver.ethanrws.com/updateteam.php?id=' + userid + '&team=' + userteam +'');
+  xhttp.send();
+}
 
+function setuserteam2(xhttp) {
+	    let response = xhttp.response;
 
+      //console.log(response);
+
+	}
 
 
 
