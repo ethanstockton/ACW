@@ -12,13 +12,9 @@
 
     </style>
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
-integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
-crossorigin=""/>
+<link rel="stylesheet" href="leaflet/leaflet.css"/>
 
-<script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
-integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
-crossorigin=""></script>
+<script src="leaflet/leaflet.js"></script>
 
 </head>
 
@@ -104,10 +100,10 @@ crossorigin=""></script>
       //"<br>Longitude: " + position.coords.longitude;
       
 
-      map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 13);
+      map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 18);
 
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
+        L.tileLayer('http://77.68.124.84:8080/tile/{z}/{x}/{y}.png', {
+        maxZoom: 25,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
