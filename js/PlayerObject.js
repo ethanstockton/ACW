@@ -90,10 +90,10 @@ class PlayerObject {
     }
 
     setteam(pteam){
-        if(this.teamset == 0){
+        //if(this.teamset == 0){
             this.team = pteam;
-            this.teamset = 1;
-        }
+            //this.teamset = 1;
+        //}
     } 
     getteam(){
         return this.team;
