@@ -11,8 +11,8 @@
         #map { height: 75vh; }
 
         .button{
-    height:50px;
-    width:8%;
+          height: 10vh;
+          width: 40vw;
 }
     </style>
 
@@ -287,14 +287,21 @@ function loaduserlocationsreturn(xhttp) {
 
           for (i = 0; i < lines.length; i++) {
              var line = lines[i].split('|');
-             console.log(line);
+             //console.log(line);
 
              var id = line[0];
              var playername = line[1];
              var locationlat = line[2];
              var locationlong = line[3];
              var playerteam = line[4];
-              var playeralreadyloaded = 0;
+
+            //add health,(have a ghost mode
+            //that shows other players as ghosts,)
+
+            //also have the localplayer have a golden halo effect to 
+            //show that it is the local player
+
+             var playeralreadyloaded = 0;
 
             
 
@@ -305,6 +312,8 @@ function loaduserlocationsreturn(xhttp) {
                   user.resetcheck();
                   user.setlocation(map, locationlat,locationlong);
                   user.setteam(playerteam);
+
+                  
                 }
           
               });
@@ -320,6 +329,10 @@ function loaduserlocationsreturn(xhttp) {
                 newuser.setlocation(map, locationlat,locationlong);
                 newuser.setteam(playerteam);
                 newuser.setcheck(1);
+                if(id == userid){
+                      //then this is the local player
+                      newuser.setlocalplayer(true);
+                }
 
                 users.push(newuser);
                 
@@ -401,12 +414,16 @@ function setuserlocationreturn(xhttp) {
 
 
 function setredteam(){
-  userteam = 1;
-  setuserteam();
+  if(userteam == 0){
+    userteam = 1;
+    setuserteam();
+  } 
 }
 function setblueteam(){
-  userteam = 2;
-  setuserteam();
+  if(userteam == 0){
+    userteam = 2;
+    setuserteam();
+  }
 }
 
 

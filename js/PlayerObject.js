@@ -9,6 +9,8 @@ class PlayerObject {
         this.check;
         this.team = 0;
         this.teamset = 0;
+
+        this.localplayer;
     }
 
     
@@ -36,9 +38,27 @@ class PlayerObject {
         //shadowSize: [68, 95],
         //shadowAnchor: [22, 94]
     });
+    redteamiconlocal = L.icon({
+        iconUrl: 'images/marker-icon-teamredlocal.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 40],
+        popupAnchor: [0, -20],
+        //shadowUrl: 'my-icon-shadow.png',
+        //shadowSize: [68, 95],
+        //shadowAnchor: [22, 94]
+    });
 
     blueteamicon = L.icon({
         iconUrl: 'images/marker-icon-teamblue.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 40],
+        popupAnchor: [0, -20],
+        //shadowUrl: 'my-icon-shadow.png',
+        //shadowSize: [68, 95],
+        //shadowAnchor: [22, 94]
+    });
+    blueteamiconlocal = L.icon({
+        iconUrl: 'images/marker-icon-teambluelocal.png',
         iconSize: [25, 41],
         iconAnchor: [12, 40],
         popupAnchor: [0, -20],
@@ -99,11 +119,18 @@ class PlayerObject {
         return this.team;
     }
     
+    setlocalplayer(plocalplayer){
+        this.localplayer = plocalplayer; 
+    } 
+    getlocalplayer(){
+        return this.localplayer;
+    }
 
     hideplayer(map){
         if(this.marker != null){
             //this.marker.setLatLng([ -84.14293855385255, 4.353638734375012]);
             map.removeLayer(this.marker);
+            this.marker = null;
         }
     }
 /*
@@ -142,20 +169,40 @@ class PlayerObject {
                 //var user2;
                 //red = 1,blue = 2
                 if(this.team == 1){
-                    var user2 = L.marker([ locationlat,locationlong],{icon: this.redteamicon});
-                    user2.bindPopup("<b>" + this.playername + "</b>").openPopup();
+                    if(this.localplayer == true){
+                        var user2 = L.marker([ locationlat,locationlong],{icon: this.redteamiconlocal});
+                        user2.bindPopup("<b>" + this.playername + "</b>").openPopup();
 
-                    user2.addTo(pmap);
+                        user2.addTo(pmap);
 
-                    this.marker = user2;
+                        this.marker = user2;
+                    }
+                    else{
+                        var user2 = L.marker([ locationlat,locationlong],{icon: this.redteamicon});
+                        user2.bindPopup("<b>" + this.playername + "</b>").openPopup();
+
+                        user2.addTo(pmap);
+
+                        this.marker = user2;
+                    }
                 }
                 if(this.team == 2){
-                    var user2 = L.marker([ locationlat,locationlong],{icon: this.blueteamicon});
-                    user2.bindPopup("<b>" + this.playername + "</b>").openPopup();
+                    if(this.localplayer == true){
+                        var user2 = L.marker([ locationlat,locationlong],{icon: this.blueteamiconlocal});
+                        user2.bindPopup("<b>" + this.playername + "</b>").openPopup();
 
-                    user2.addTo(pmap);
+                        user2.addTo(pmap);
 
-                    this.marker = user2;
+                        this.marker = user2;
+                    }
+                    else{
+                        var user2 = L.marker([ locationlat,locationlong],{icon: this.blueteamicon});
+                        user2.bindPopup("<b>" + this.playername + "</b>").openPopup();
+
+                        user2.addTo(pmap);
+
+                        this.marker = user2;
+                    }
                 }
                 
 
