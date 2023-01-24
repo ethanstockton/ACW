@@ -104,7 +104,7 @@ updateview(){
             color: 'white',
             fillColor: '#f03',
             fillOpacity: 0.5,
-            radius: 60
+            radius: this.radius
         });
         markerbase.bindPopup("<b>" + this.capturepointname + "</b>").openPopup();
 
