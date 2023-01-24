@@ -91,15 +91,26 @@ updateview(){
         this.marker.setLatLng([this.locationlat, this.locationlong]);
     }
     else{
+        /*
         this.marker = L.circle([this.locationlat, this.locationlong], {
             color: 'white',
             fillColor: '#f03',
             fillOpacity: 0.5,
             radius: this.radius
         }).addTo(this.map).bindPopup(this.capturepointname);
+        */
         
-        
-       
+        var markerbase = L.circle([this.locationlat, this.locationlong], {
+            color: 'white',
+            fillColor: '#f03',
+            fillOpacity: 0.5,
+            radius: 60
+        });
+        markerbase.bindPopup("<b>" + this.capturepointname + "</b>").openPopup();
+
+        markerbase.addTo(map);
+
+        this.marker = markerbase;
     
         
         
