@@ -254,6 +254,9 @@ function loadgameinforeturn(xhttp) {
 
               var teamalreadyloaded = 0;
 
+              if(teams.length() != 0){
+
+              
                 teams.forEach(team => {
   
                   if(team.getid() == id){
@@ -263,6 +266,8 @@ function loadgameinforeturn(xhttp) {
                     team.setteamcapcount(teamcapcount);
                   }
                 });
+
+              }
   
               if(teamalreadyloaded == 0){
                 var newteam = new TeamObject(id,teamname,teamscore,teamcapcount);
@@ -289,6 +294,7 @@ function loadgameinforeturn(xhttp) {
 
               var capturepointalreadyloaded = 0;
 
+              if(capturepoints.length() != 0){
               capturepoints.forEach(capturepoint => {
 
                 if(capturepoint.getid() == id){
@@ -300,6 +306,7 @@ function loadgameinforeturn(xhttp) {
 
                 }
               });
+            }
 
               if(capturepointalreadyloaded == 0){
                 var newcapturepoint = new CapturePointObject(id,capturepointname,teamscore,teamcapcount,radius,locationlat,locationlong);
@@ -331,7 +338,7 @@ function loadgameinforeturn(xhttp) {
              var playeralreadyloaded = 0;
 
             
-
+             if(users.length() != 0){
              users.forEach(user => {
                
                 if(user.getid() == id){
@@ -344,6 +351,7 @@ function loadgameinforeturn(xhttp) {
                 }
           
               });
+            }
                
 
               if(playeralreadyloaded == 0){
