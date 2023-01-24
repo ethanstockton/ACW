@@ -300,9 +300,9 @@ function loadgameinforeturn(xhttp) {
                 if(capturepoint.getid() == id){
                   capturepointalreadyloaded = 1;
                   //here will be where the map ref, and lat, long are passed
-                  capturepoints.setcapturedteam(capturedteam);
-                  capturepoints.setcapturedteamvalue(capturedteamvalue);
-                  capturepoints.updateview();
+                  capturepoint.setcapturedteam(capturedteam);
+                  capturepoint.setcapturedteamvalue(capturedteamvalue);
+                  capturepoint.updateview();
 
                 }
               });
