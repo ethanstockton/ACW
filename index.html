@@ -6,7 +6,8 @@
 
     <title>Capture The Campus</title>
     <script type="text/javascript" src="js/PlayerObject.js"></script>
-
+    <script type="text/javascript" src="js/TeamObject.js"></script>
+    <script type="text/javascript" src="js/CapturePointObject.js"></script>
     <style>
         #map { height: 75vh; }
 
@@ -51,12 +52,9 @@
 <script>
     
     var map;
-    //var user;
+    
 
-    var users = [];
-
-    //create js objects to hold the marker, and other player info, this can then be used(with a check loop) to see if the 
-    //player is still online, and so that the player can be moved
+    
 
     var x = document.getElementById("demo");
 
@@ -67,31 +65,7 @@
         x.innerHTML = "Geolocation is not supported by this browser.";
       }
     }
-    /*
-    function showPosition(position) {
-      x.innerHTML = "Latitude: " + position.coords.latitude +
-      "<br>Longitude: " + position.coords.longitude;
-
-      if(map != null){
-
-        if(user != null){
-            user.setLatLng([position.coords.latitude, position.coords.longitude]);
-        }
-        if(user == null){
-            user = L.marker([position.coords.latitude, position.coords.longitude]);
-            user.addTo(map);
-            
-        }
-
-        
-      }
-    }
-*/
-    //var loop = setInterval(test, 1000);
-    //setInterval(getLocation, 1000);
-
-
-
+    
     function setLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPositionmap);
@@ -100,8 +74,6 @@
       }
     }
     function showPositionmap(position) {
-      //x.innerHTML = "Latitude: " + position.coords.latitude +
-      //"<br>Longitude: " + position.coords.longitude;
       
 
       map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 19);
@@ -111,60 +83,18 @@
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
       
-
-
-
       }
 
     setLocation();
-    //var map = L.map('map').setView([51.505, -0.09], 13);
-
-    
-//map.removeLayer(marker);
-
-
     
 
-    function getResponse(xhttp) {
-	    let response = xhttp.response;
 
-      //console.log(response);
+    var users = [];
+    //create js objects to hold the marker, and other player info, this can then be used(with a check loop) to see if the 
+    //player is still online, and so that the player can be moved
 
-      var lines = response.split(/\r?\n|\r|\n/g);
-               // var lines = response.match(/[^\r\n]+/g);
-
-				
-				
-      for (i = 0; i < lines.length; i++) {
-				
-				
-				
-					
-					
-      }
-				
-				
-				
-	}
-
-
-
-//loadDoc('https://uniserver.ethanrws.com/.php', getResponse);
-
-
-
-function loadDoc(url, cFunction) {
-  const xhttp = new XMLHttpRequest();
-  xhttp.onload = function() {cFunction(this);}
-  xhttp.open("GET", url);
-  xhttp.send();
-}
-
-
-
-
-
-
+    var teams = [];
+    var capturepoints = [];
 
 //run every 1000 ms
 //game loop 
@@ -246,7 +176,7 @@ function GameLoop() {
     
 
 
-     loaduserlocations();
+     loadgameinfo();
 
 
 
@@ -267,25 +197,119 @@ function GameLoop() {
 
 
 
-function loaduserlocations() {
+function loadgameinfo() {
   const xhttp = new XMLHttpRequest();
-  xhttp.onload = function() {loaduserlocationsreturn(this);}
-  xhttp.open("GET", 'https://uniserver.ethanrws.com/getlocations.php');
+  xhttp.onload = function() {loadgameinforeturn(this);}
+  xhttp.open("GET", 'https://uniserver.ethanrws.com/getgameinfo.php');
   xhttp.send();
 }
 
-function loaduserlocationsreturn(xhttp) {
+function loadgameinforeturn(xhttp) {
 	    let response = xhttp.response;
 
       //console.log(response);
 
       var lines = response.split(/\r?\n|\r|\n/g);
       //console.log(lines);    
+
+      //used when loading the lines, to determine what is been loaded
+      //and therefore where does the data need to go
+      var linetype = 0;
              
       if(lines[0] != ""){
 
-
           for (i = 0; i < lines.length; i++) {
+            var linetypechange = 0;
+            if(lines[i] == "###teams"){
+              //then set it to teams mode,
+              //and continue until another modechange occurs
+              linetype = 1;
+              linetypechange = 1;
+            }
+            if(lines[i] == "###capturepoints"){
+              //then set it to capturepoints mode,
+              //and continue until another modechange occurs
+              linetype = 2;
+              linetypechange = 1;
+            }
+            if(lines[i] == "###players"){
+              //then set it to players mode,
+              //and continue until the end of the lines
+              linetype = 3;
+              linetypechange = 1;
+            }
+
+            //team mode
+            if(linetype == 1 && linetypechange == 0){
+
+              var line = lines[i].split('|');
+
+              var id = line[0];
+              var teamname = line[1];
+              var teamscore = line[2];
+              var teamcapcount = line[3];
+
+              var teamalreadyloaded = 0;
+
+                teams.forEach(team => {
+  
+                  if(team.getid() == id){
+                    teamalreadyloaded = 1;
+
+                    team.setteamscore(teamscore);
+                    team.setteamcapcount(teamcapcount);
+                  }
+                });
+  
+              if(teamalreadyloaded == 0){
+                var newteam = new TeamObject(id,teamname,teamscore,teamcapcount);
+                teams.push(newuser);
+              } 
+
+
+            }
+
+            //capture points mode
+            if(linetype == 2 && linetypechange == 0){
+
+              var line = lines[i].split('|');
+
+              var id = line[0];
+              var capturepointname = line[1];
+
+              var locationlat = line[2];
+              var locationlong = line[3];
+
+              var capturedteam = line[4];
+              var capturedteamvalue = line[5];
+              var radius = line[5];
+
+              var capturepointalreadyloaded = 0;
+
+              capturepoints.forEach(capturepoint => {
+
+                if(capturepoint.getid() == id){
+                  capturepointalreadyloaded = 1;
+                  //here will be where the map ref, and lat, long are passed
+                  capturepoints.setcapturedteam(capturedteam);
+                  capturepoints.setcapturedteamvalue(capturedteamvalue);
+                  capturepoints.updateview();
+
+                }
+              });
+
+              if(capturepointalreadyloaded == 0){
+                var newcapturepoint = new CapturePointObject(id,capturepointname,teamscore,teamcapcount,radius,locationlat,locationlong);
+                capturepoints.push(newcapturepoint);
+              } 
+
+
+            }
+
+            //player mode
+            if(linetype == 3 && linetypechange == 0){
+
+            
              var line = lines[i].split('|');
              //console.log(line);
 
@@ -338,6 +362,10 @@ function loaduserlocationsreturn(xhttp) {
                 
                 
             }
+
+
+            }
+
 
 
            }
@@ -446,32 +474,6 @@ function setuserteam2(xhttp) {
 
 
 
-
-/*
-//cookie stuff from w3 schools
-function setCookie(cname, cvalue, exdays) {
-  const d = new Date();
-  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-  let expires = "expires="+d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-  let name = cname + "=";
-  let ca = document.cookie.split(';');
-  for(let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-
-*/
 
 </script>
 

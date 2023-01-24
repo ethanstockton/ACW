@@ -67,6 +67,18 @@ class PlayerObject {
         //shadowAnchor: [22, 94]
     });
 
+
+    //have a icon for each 10% of health, so when at 84%, it would show 80%
+
+    //maybe have the healthbar change size and anchor so that it looks like it is going down, 
+    //this can be done for each player,
+    //also maybe use the same idea for a player name tag(also maybe have a toggle for it so that it can be turned off)
+    //also maybe have the player name shown in a different colour so that it can be seen more easily.
+
+
+
+
+
     setid(pid){
         this.id = pid;
     } 
@@ -133,25 +145,16 @@ class PlayerObject {
             this.marker = null;
         }
     }
-/*
-    setlocationnew(pmap, location){
 
-        var location2 = location.replace('[', '');
-              var location3 = location2.replace(']', '');
-              var location4 = location3.split(',');
 
-        var user2 = L.marker([location4[0], location4[1]]);
+    //have the health bar be multiple icons that when they change have the icon be switched out for a different icon
+    //also needs to be updated to the location of the player when the player moves
+    //have an offset for it, so that it shows above the player icon
 
-        user2.bindPopup("<b>" + this.playername + "</b>").openPopup();
 
-        user2.addTo(pmap);
 
-        this.marker = user2;
-    }
-*/
     setlocation(pmap ,locationlat, locationlong){
-        //only create the marker when the player has chosen a team
-        //if(this.teamset == 1){
+        
             if(locationlat == null){
                 locationlat = 0;
             }
@@ -166,7 +169,6 @@ class PlayerObject {
             else{
             
             
-                //var user2;
                 //red = 1,blue = 2
                 if(this.team == 1){
                     if(this.localplayer == true){
@@ -205,16 +207,11 @@ class PlayerObject {
                     }
                 }
                 
-
-                //user2.bindPopup("<b>" + this.playername + "</b>").openPopup();
-
-                //user2.addTo(pmap);
-
-                //this.marker = user2;
+                
 
             
             }
-        //}
+        
        
     }
 }
