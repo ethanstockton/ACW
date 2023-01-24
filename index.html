@@ -254,7 +254,7 @@ function loadgameinforeturn(xhttp) {
 
               var teamalreadyloaded = 0;
 
-              if(teams.length() != 0){
+              if(teams.length != 0){
 
               
                 teams.forEach(team => {
@@ -294,7 +294,7 @@ function loadgameinforeturn(xhttp) {
 
               var capturepointalreadyloaded = 0;
 
-              if(capturepoints.length() != 0){
+              if(capturepoints.length != 0){
               capturepoints.forEach(capturepoint => {
 
                 if(capturepoint.getid() == id){
@@ -338,7 +338,7 @@ function loadgameinforeturn(xhttp) {
              var playeralreadyloaded = 0;
 
             
-             if(users.length() != 0){
+             if(users.length != 0){
              users.forEach(user => {
                
                 if(user.getid() == id){
