@@ -84,21 +84,54 @@ updateview(){
     }
     if(this.locationlong == null){
         this.locationlong = 0;
-     }
+    }
 
     if(this.marker != null){
 
         this.marker.setLatLng([this.locationlat, this.locationlong]);
+
+
+        var redradius = 0;
+        var redopacity = 0;
+        if(this.capturedteam == 1){
+            if(this.capturedteamvalue > 0){
+                redradius = this.radius * (this.capturedteamvalue/100)
+            }
+        }
+        if(redradius != 0){
+            redopacity = 1;
+        }
+        else{
+            redopacity = 0;
+        }
+
+        var blueradius = 0;
+        var blueopacity = 0;
+        if(this.capturedteam == 2){
+            if(this.capturedteamvalue > 0){
+                blueradius = this.radius * (this.capturedteamvalue/100)
+            }
+        }
+        if(blueradius != 0){
+            blueopacity = 1;
+        }
+        else{
+            blueopacity = 0;
+        }
+
+        this.markerred.setStyle({
+            fillOpacity: redopacity
+        });
+        this.markerred.setRadius(redradius);
+
+        this.markerblue.setStyle({
+            fillOpacity: blueopacity
+        });
+        this.markerblue.setRadius(blueradius);
+
     }
     else{
-        /*
-        this.marker = L.circle([this.locationlat, this.locationlong], {
-            color: 'white',
-            fillColor: '#f03',
-            fillOpacity: 0.5,
-            radius: this.radius
-        }).addTo(this.map).bindPopup(this.capturepointname);
-        */
+        
         
         var markerbase = L.circle([this.locationlat, this.locationlong], {
             color: 'white',
@@ -114,63 +147,27 @@ updateview(){
     
         
 
-        var markerbase = L.circle([this.locationlat, this.locationlong], {
-            color: 'white',
-            fillColor: '#f2f3f4',
-            fillOpacity: 0.5,
-            radius: this.radius
-        });
-        markerbase.bindPopup("<b>" + this.capturepointname + "</b>").openPopup();
-
-        markerbase.addTo(map);
-
-        this.marker = markerbase;
-        
-        var redradius = 0;
-        var redopacity = 0;
-        if(this.capturedteam == 1){
-            if(this.capturedteamvalue > 0){
-                redradius = this.radius * (this.capturedteamvalue/100)
-            }
-        }
-        if(redradius != 0){
-            redopacity = 0.5;
-        }
-        else{
-            redopacity = 0;
-        }
-
-        var blueradius = 0;
-        var blueopacity = 0;
-        if(this.capturedteam == 2){
-            if(this.capturedteamvalue > 0){
-                blueradius = this.radius * (this.capturedteamvalue/100)
-            }
-        }
-        if(blueradius != 0){
-            blueopacity = 0.5;
-        }
-        else{
-            blueopacity = 0;
-        }
-
         var markerred2 = L.circle([this.locationlat, this.locationlong], {
             color: 'white',
+            opacity: 0,
             fillColor: '#e32636',
-            fillOpacity: redopacity,
-            radius: redradius
+            fillOpacity: 0,
+            radius: 1
         });
         markerred2.addTo(map);
         this.markerred = markerred2;
-
+        
+        
         var markerblue2 = L.circle([this.locationlat, this.locationlong], {
             color: 'white',
+            opacity: 0,
             fillColor: '#007fff',
-            fillOpacity: blueopacity,
-            radius: blueradius
+            fillOpacity: 0,
+            radius: 1
         });
         markerblue2.addTo(map);
         this.markerblue = markerblue2;
+
     }
 
 
