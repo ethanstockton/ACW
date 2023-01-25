@@ -17,14 +17,17 @@ class PlayerObject {
 
         this.healthbargreen;
         this.healthbarred;
+
+        this.playernameplayer;
+
+        this.playername0;//index the player number Player[0][1][2][3][4]
+        this.playername1;
+        this.playername2;
+        this.playername3;
+        this.playername4;
     }
 
-    
-
-    //spectatoricon = new LeafIcon({iconUrl: 'images/marker-icon-speclightblue.png'});
-    //redteamicon = new LeafIcon({iconUrl: 'images/marker-icon-teamred.png'});
-    //blueteamicon = new LeafIcon({iconUrl: 'images/marker-icon-teamblue.png'});
-
+    /*
     spectatoricon = L.icon({
         iconUrl: 'images/marker-icon-speclightblue.png',
         iconSize: [25, 41],
@@ -33,7 +36,7 @@ class PlayerObject {
         //shadowUrl: 'my-icon-shadow.png',
         //shadowSize: [68, 95],
         //shadowAnchor: [22, 94]
-    });
+    });*/
 
     redteamicon = L.icon({
         iconUrl: 'images/marker-icon-teamred.png',
@@ -87,6 +90,8 @@ class PlayerObject {
                     iconAnchor: [50, 60]
         
     });
+
+    
     //have a icon for each 10% of health, so when at 84%, it would show 80%
 
     //use a polygon rectangle
@@ -95,7 +100,18 @@ class PlayerObject {
     //also maybe use the same idea for a player name tag(also maybe have a toggle for it so that it can be turned off)
     //also maybe have the player name shown in a different colour so that it can be seen more easily.
 
-
+    playernamered = L.icon({
+        iconUrl: 'images/playernameplayerred.png',
+                    iconSize: [100, 30],
+                    iconAnchor: [50, 90]
+        
+    });
+    playernameblue = L.icon({
+        iconUrl: 'images/playernameplayerblue.png',
+                    iconSize: [100, 30],
+                    iconAnchor: [50, 90]
+        
+    });
 
 
 
@@ -206,6 +222,9 @@ getclass(){
                 this.healthbarred.setLatLng([ locationlat, locationlong]);
                 this.healthbargreen.setLatLng([ locationlat, locationlong]);
 
+                this.playernameplayer.setLatLng([ locationlat, locationlong]);
+                
+
 
                 this.healthicongreen = L.icon({
                     iconUrl: 'images/healthbargreen.png',
@@ -237,6 +256,16 @@ getclass(){
 
                         this.marker = user2;
                     }
+
+                    var playernameplayer2 = L.marker([ locationlat,locationlong],{icon: this.playernamered});
+                    playernameplayer2.addTo(pmap);
+                    this.playernameplayer = playernameplayer2;
+
+
+                    //here will be the loop that loads the player number to icons (maybe have the offsets and icon references predetermined)
+                    
+
+
                 }
                 if(this.team == 2){
                     if(this.localplayer == true){
@@ -255,13 +284,17 @@ getclass(){
 
                         this.marker = user2;
                     }
+
+                    var playernameplayer2 = L.marker([ locationlat,locationlong],{icon: this.playernameblue});
+                    playernameplayer2.addTo(pmap);
+                    this.playernameplayer = playernameplayer2;
                 }
                 
                 
                  var healthbarred2 = L.marker([ locationlat,locationlong],{icon: this.healthiconred});
 
                  healthbarred2.addTo(pmap);
-                 
+
                 this.healthbarred = healthbarred2;
 
                 
