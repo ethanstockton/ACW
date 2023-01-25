@@ -80,13 +80,13 @@ class PlayerObject {
                     iconAnchor: [50, 60]
         
     });
-/*
+
     healthiconred = L.icon({
         iconUrl: 'images/healthbarred.png',
                     iconSize: [100, 10],
                     iconAnchor: [50, 60]
         
-    });*/
+    });
     //have a icon for each 10% of health, so when at 84%, it would show 80%
 
     //use a polygon rectangle
@@ -203,13 +203,13 @@ getclass(){
 
                 this.marker.setLatLng([ locationlat, locationlong]);
 
-                //this.healthbarred.setLatLng([ locationlat, locationlong]);
+                this.healthbarred.setLatLng([ locationlat, locationlong]);
                 this.healthbargreen.setLatLng([ locationlat, locationlong]);
 
 
                 this.healthicon = L.icon({
                     iconUrl: 'images/healthbargreen.png',
-                                iconSize: [(this.health/100), 10],
+                                iconSize: [(this.health), 10],
                                 iconAnchor: [50, 60]
                     
                 });
@@ -258,9 +258,9 @@ getclass(){
                 }
                 
                 
-               // var healthbarred2 = L.marker([ locationlat,locationlong],{icon: this.healthiconred});
-               // healthbarred2.addTo(pmap);
-                //this.healthbarred = healthbarred2;
+                 var healthbarred2 = L.marker([ locationlat,locationlong],{icon: this.healthiconred});
+                healthbarred2.addTo(pmap);
+                this.healthbarred = healthbarred2;
 
                 
 
