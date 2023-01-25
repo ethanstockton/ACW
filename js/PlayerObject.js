@@ -11,6 +11,12 @@ class PlayerObject {
         this.teamset = 0;
 
         this.localplayer;
+
+        this.health = 0;
+        this.class = 0;
+
+        this.healthbargreen;
+        this.healthbarred;
     }
 
     
@@ -68,8 +74,22 @@ class PlayerObject {
     });
 
 
+    healthicon = L.icon({
+        iconUrl: 'images/healthbargreen.png',
+                    iconSize: [100, 10],
+                    iconAnchor: [50, 60]
+        
+    });
+
+    healthiconred = L.icon({
+        iconUrl: 'images/healthbarred.png',
+                    iconSize: [100, 10],
+                    iconAnchor: [50, 60]
+        
+    });
     //have a icon for each 10% of health, so when at 84%, it would show 80%
 
+    //use a polygon rectangle
     //maybe have the healthbar change size and anchor so that it looks like it is going down, 
     //this can be done for each player,
     //also maybe use the same idea for a player name tag(also maybe have a toggle for it so that it can be turned off)
@@ -130,6 +150,23 @@ class PlayerObject {
     getteam(){
         return this.team;
     }
+
+    sethealth(phealth){
+        
+            this.health = phealth;
+           
+    } 
+    gethealth(){
+        return this.health;
+    }
+
+    setclass(pclass){
+        
+        this.class = pclass;
+       } 
+getclass(){
+    return this.class;
+}
     
     setlocalplayer(plocalplayer){
         this.localplayer = plocalplayer; 
@@ -165,6 +202,19 @@ class PlayerObject {
             if(this.marker != null){
 
                 this.marker.setLatLng([ locationlat, locationlong]);
+
+                this.healthbarred.setLatLng([ locationlat, locationlong]);
+                this.healthbargreen.setLatLng([ locationlat, locationlong]);
+
+
+                this.healthicon = L.icon({
+                    iconUrl: 'images/healthbargreen.png',
+                                iconSize: [(this.health/100), 10],
+                                iconAnchor: [50, 60]
+                    
+                });
+                this.healthbargreen.setIcon(this.healthicon);
+
             }
             else{
             
@@ -207,6 +257,19 @@ class PlayerObject {
                     }
                 }
                 
+                
+                var healthbarred2 = L.marker([ locationlat,locationlong],{icon: this.healthiconred});
+               
+                healthbarred2.addTo(pmap);
+
+                this.healthbarred = healthbarred2;
+
+
+                var healthbargreen2 = L.marker([ locationlat,locationlong],{icon: this.healthicon});
+               
+                healthbargreen2.addTo(pmap);
+
+                this.healthbargreen = healthbargreen2;
                 
 
             

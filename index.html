@@ -328,6 +328,8 @@ function loadgameinforeturn(xhttp) {
              var locationlat = line[2];
              var locationlong = line[3];
              var playerteam = line[4];
+             var playerhealth = line[5];
+             var playerclass = line[6];
 
             //add health,(have a ghost mode
             //that shows other players as ghosts,)
@@ -347,6 +349,8 @@ function loadgameinforeturn(xhttp) {
                   user.setlocation(map, locationlat,locationlong);
                   user.setteam(playerteam);
 
+                  user.sethealth(playerhealth);
+                  user.setclass(playerclass);
                   
                 }
           
@@ -363,6 +367,8 @@ function loadgameinforeturn(xhttp) {
                 newuser.setplayername(playername);
                 newuser.setlocation(map, locationlat,locationlong);
                 newuser.setteam(playerteam);
+                newuser.sethealth(playerhealth);
+                newuser.setclass(playerclass);
                 newuser.setcheck(1);
                 if(id == userid){
                       //then this is the local player
