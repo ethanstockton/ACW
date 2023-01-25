@@ -154,6 +154,7 @@ updateview(){
             fillOpacity: 0,
             radius: 1
         });
+        markerred2.bindPopup("<b>" + this.capturepointname + "</b>").openPopup();
         markerred2.addTo(map);
         this.markerred = markerred2;
         
@@ -165,6 +166,7 @@ updateview(){
             fillOpacity: 0,
             radius: 1
         });
+        markerblue2.bindPopup("<b>" + this.capturepointname + "</b>").openPopup();
         markerblue2.addTo(map);
         this.markerblue = markerblue2;
 
