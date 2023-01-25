@@ -210,7 +210,7 @@ function loadgameinforeturn(xhttp) {
       //console.log(response);
 
       var lines = response.split(/\r?\n|\r|\n/g);
-      console.log(lines);    
+      //console.log(lines);    
 
       //used when loading the lines, to determine what is been loaded
       //and therefore where does the data need to go
@@ -221,21 +221,21 @@ function loadgameinforeturn(xhttp) {
           for (i = 0; i < lines.length; i++) {
             var linetypechange = 0;
             if(lines[i] == "###teams"){
-              console.log(lines[i]);  
+              //console.log(lines[i]);  
               //then set it to teams mode,
               //and continue until another modechange occurs
               linetype = 1;
               linetypechange = 1;
             }
             if(lines[i] == "###capturepoints"){
-              console.log(lines[i]);
+              //console.log(lines[i]);
               //then set it to capturepoints mode,
               //and continue until another modechange occurs
               linetype = 2;
               linetypechange = 1;
             }
             if(lines[i] == "###players"){
-              console.log(lines[i]);
+              //console.log(lines[i]);
               //then set it to players mode,
               //and continue until the end of the lines
               linetype = 3;
@@ -246,7 +246,7 @@ function loadgameinforeturn(xhttp) {
             if(linetype == 1 && linetypechange == 0){
 
               var line = lines[i].split('|');
-              console.log(lines[i]);
+              //console.log(lines[i]);
               var id = line[0];
               var teamname = line[1];
               var teamscore = line[2];
@@ -281,7 +281,7 @@ function loadgameinforeturn(xhttp) {
             if(linetype == 2 && linetypechange == 0){
 
               var line = lines[i].split('|');
-              console.log(lines[i]);
+              //console.log(lines[i]);
               var id = line[0];
               var capturepointname = line[1];
 
@@ -322,7 +322,7 @@ function loadgameinforeturn(xhttp) {
             
              var line = lines[i].split('|');
              //console.log(line);
-             console.log(lines[i]);
+             //console.log(lines[i]);
              var id = line[0];
              var playername = line[1];
              var locationlat = line[2];
