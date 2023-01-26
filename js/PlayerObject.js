@@ -195,6 +195,29 @@ getclass(){
         if(this.marker != null){
             //this.marker.setLatLng([ -84.14293855385255, 4.353638734375012]);
             map.removeLayer(this.marker);
+
+            map.removeLayer(this.healthbargreen);
+            map.removeLayer(this.healthbarred);
+
+            map.removeLayer(this.playernameplayer);
+
+            map.removeLayer(this.playername0);
+            map.removeLayer(this.playername1);
+            map.removeLayer(this.playername2);
+            map.removeLayer(this.playername3);
+            map.removeLayer(this.playername4);
+
+            this.healthbargreen = null;
+            this.healthbarred = null;
+
+            this.playernameplayer = null;
+
+            this.playername0 = null;
+            this.playername1 = null;
+            this.playername2 = null;
+            this.playername3 = null;
+            this.playername4 = null;
+
             this.marker = null;
         }
     }
