@@ -12,6 +12,8 @@ class CapturePointObject {
         this.capturedteamvalue = pcapturedteamvalue;
         this.radius = pradius;
 
+        this.capturenametag;
+
         this.map = pmap;
         this.marker;//base marker
         this.markerred;//base marker
@@ -92,6 +94,9 @@ updateview(){
 
         this.marker.setLatLng([this.locationlat, this.locationlong]);
 
+        this.capturenametag.setLatLng([this.locationlat, this.locationlong]);
+
+        
 
         var redradius = 0;
         var redopacity = 0;
@@ -141,7 +146,7 @@ updateview(){
             fillOpacity: 0.5,
             radius: this.radius
         });
-        markerbase.bindPopup("<b>" + this.capturepointname + "</b>").openPopup();
+        //markerbase.bindPopup("<b>" + this.capturepointname + "</b>").openPopup();
 
         markerbase.addTo(map);
 
@@ -156,7 +161,7 @@ updateview(){
             fillOpacity: 0,
             radius: 1
         });
-        markerred2.bindPopup("<b>" + this.capturepointname + "</b>").openPopup();
+        //markerred2.bindPopup("<b>" + this.capturepointname + "</b>").openPopup();
         markerred2.addTo(map);
         this.markerred = markerred2;
         
@@ -168,9 +173,27 @@ updateview(){
             fillOpacity: 0,
             radius: 1
         });
-        markerblue2.bindPopup("<b>" + this.capturepointname + "</b>").openPopup();
+        //markerblue2.bindPopup("<b>" + this.capturepointname + "</b>").openPopup();
         markerblue2.addTo(map);
         this.markerblue = markerblue2;
+
+
+
+
+        var capturenametag2 = L.marker([ this.locationlat,this.locationlong],{icon: L.icon({
+            iconUrl: 'images/numbersblue/playernameblue0.png',
+            iconSize: [0, 0],
+            iconAnchor: [0, 0]
+        })
+        });
+        capturenametag2.bindTooltip("" + this.capturepointname, {
+                permanent: true,
+                direction: 'center',
+                className: "capture",
+                offset: [0, 0]
+             });
+             capturenametag2.addTo(map);
+        this.capturenametag = capturenametag2;
 
     }
 
