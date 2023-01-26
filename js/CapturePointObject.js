@@ -72,6 +72,8 @@ class CapturePointObject {
     
 updateview(){
 
+//maybe add a name tag thing for the capture points
+
 //have the map view change if it needs to
 //
     //the base icon on the map

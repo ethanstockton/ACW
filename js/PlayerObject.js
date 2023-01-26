@@ -20,11 +20,13 @@ class PlayerObject {
 
         this.playernameplayer;
 
+        /*
         this.playername0;//index the player number Player[0][1][2][3][4]
         this.playername1;
         this.playername2;
         this.playername3;
-        this.playername4;
+        this.playername4;*/
+
     }
 
     /*
@@ -100,6 +102,7 @@ class PlayerObject {
     //also maybe use the same idea for a player name tag(also maybe have a toggle for it so that it can be turned off)
     //also maybe have the player name shown in a different colour so that it can be seen more easily.
 
+    /*
     playernamered = L.icon({
         iconUrl: 'images/playernameplayerred.png',
                     iconSize: [100, 30],
@@ -112,7 +115,7 @@ class PlayerObject {
                     iconAnchor: [50, 90]
         
     });
-
+*/
 
 
     setid(pid){
@@ -201,22 +204,22 @@ getclass(){
 
             map.removeLayer(this.playernameplayer);
 
-            map.removeLayer(this.playername0);
-            map.removeLayer(this.playername1);
-            map.removeLayer(this.playername2);
-            map.removeLayer(this.playername3);
-            map.removeLayer(this.playername4);
+            //map.removeLayer(this.playername0);
+            //map.removeLayer(this.playername1);
+            //map.removeLayer(this.playername2);
+            //map.removeLayer(this.playername3);
+            //map.removeLayer(this.playername4);
 
             this.healthbargreen = null;
             this.healthbarred = null;
 
             this.playernameplayer = null;
 
-            this.playername0 = null;
-            this.playername1 = null;
-            this.playername2 = null;
-            this.playername3 = null;
-            this.playername4 = null;
+            //this.playername0 = null;
+            //this.playername1 = null;
+            //this.playername2 = null;
+            //this.playername3 = null;
+            //this.playername4 = null;
 
             this.marker = null;
         }
@@ -243,7 +246,7 @@ getclass(){
                 this.marker.setLatLng([ locationlat, locationlong]);
 
                 this.healthbarred.setLatLng([ locationlat, locationlong]);
-                
+
                 this.healthicongreen = L.icon({
                     iconUrl: 'images/healthbargreen.png',
                                 iconSize: [(this.health/100)*100, 10],
@@ -256,6 +259,7 @@ getclass(){
 
                 this.playernameplayer.setLatLng([ locationlat, locationlong]);
                 
+                /** 
                 if(this.playername0 != null){
                     this.playername0.setLatLng([ locationlat, locationlong]);
                 }
@@ -271,7 +275,7 @@ getclass(){
                 if(this.playername4 != null){
                     this.playername4.setLatLng([ locationlat, locationlong]);
                 }
-
+*/
 
                 
 
@@ -283,7 +287,7 @@ getclass(){
                 if(this.team == 1){
                     if(this.localplayer == true){
                         var user2 = L.marker([ locationlat,locationlong],{icon: this.redteamiconlocal});
-                        user2.bindPopup("<b>" + this.playername + "</b>").openPopup();
+                        //user2.bindPopup("<b>" + this.playername + "</b>").openPopup();
 
                         user2.addTo(pmap);
 
@@ -291,22 +295,33 @@ getclass(){
                     }
                     else{
                         var user2 = L.marker([ locationlat,locationlong],{icon: this.redteamicon});
-                        user2.bindPopup("<b>" + this.playername + "</b>").openPopup();
+                        //user2.bindPopup("<b>" + this.playername + "</b>").openPopup();
 
                         user2.addTo(pmap);
 
                         this.marker = user2;
                     }
 
-                    var playernameplayer2 = L.marker([ locationlat,locationlong],{icon: this.playernamered});
+                    var playernameplayer2 = L.marker([ locationlat,locationlong],{icon: L.icon({
+                        iconUrl: 'images/numbersblue/playernameblue0.png',
+                        iconSize: [0, 0],
+                        iconAnchor: [0, 0]
+                    })
+                    });
+                    playernameplayer2.bindTooltip("Player" + this.id, {
+                            permanent: true,
+                            direction: 'center',
+                            className: "redteam",
+                            offset: [0, -70]
+                         });
                     playernameplayer2.addTo(pmap);
                     this.playernameplayer = playernameplayer2;
 
 
                     //here will be the loop that loads the player number to icons (maybe have the offsets and icon references predetermined)
-                    
+                    /**
                     var numbers = this.id.split('');
-                    console.log(numbers);
+                    
                     var i = 1;
                     numbers.forEach(number => {
                         if(number == 0){
@@ -553,14 +568,14 @@ getclass(){
                        i++;
                       });
 
-
+*/
 
 
                 }
                 if(this.team == 2){
                     if(this.localplayer == true){
                         var user2 = L.marker([ locationlat,locationlong],{icon: this.blueteamiconlocal});
-                        user2.bindPopup("<b>" + this.playername + "</b>").openPopup();
+                        //user2.bindPopup("<b>" + this.playername + "</b>").openPopup();
 
                         user2.addTo(pmap);
 
@@ -568,21 +583,39 @@ getclass(){
                     }
                     else{
                         var user2 = L.marker([ locationlat,locationlong],{icon: this.blueteamicon});
-                        user2.bindPopup("<b>" + this.playername + "</b>").openPopup();
+                        //user2.bindPopup("<b>" + this.playername + "</b>").openPopup();
 
                         user2.addTo(pmap);
 
                         this.marker = user2;
                     }
 
-                    var playernameplayer2 = L.marker([ locationlat,locationlong],{icon: this.playernameblue});
+
+                    var playernameplayer2 = L.marker([ locationlat,locationlong],{icon: L.icon({
+                        iconUrl: 'images/numbersblue/playernameblue0.png',
+                        iconSize: [0, 0],
+                        iconAnchor: [0, 0]
+                    })
+                    });
+                    playernameplayer2.bindTooltip("Player" + this.id, {
+                            permanent: true,
+                            direction: 'center',
+                            className: "blueteam",
+                            offset: [0, -80]
+                         });
                     playernameplayer2.addTo(pmap);
                     this.playernameplayer = playernameplayer2;
 
 
+                    /** 
+                    var playernameplayer2 = L.marker([ locationlat,locationlong],{icon: this.playernameblue});
+                    playernameplayer2.addTo(pmap);
+                    this.playernameplayer = playernameplayer2;
+*/
+                    /** 
 
                     var numbers = this.id.split('');
-                    console.log(numbers);
+                   
                     var i = 1;
                     numbers.forEach(number => {
                         if(number == 0){
@@ -828,6 +861,10 @@ getclass(){
 
                        i++;
                       });
+                      
+                      */
+
+
                 }
                 
                 
