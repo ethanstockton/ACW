@@ -150,25 +150,26 @@ getclass(){
         if(this.marker != null){
             //this.marker.setLatLng([ -84.14293855385255, 4.353638734375012]);
             map.removeLayer(this.marker);
-
-            map.removeLayer(this.healthbarredd);
-
-            map.removeLayer(this.healthbargreen);
-            
-
-            map.removeLayer(this.playernameplayer);
-
-            
-
-            this.healthbargreen = null;
-
-            this.healthbarredd = null;
-
-            this.playernameplayer = null;
-
-
             this.marker = null;
         }
+
+        if(this.healthbarredd != null){
+            map.removeLayer(this.healthbarredd);
+            this.healthbarredd = null;
+        }
+
+        if(this.healthbargreen != null){
+            map.removeLayer(this.healthbargreen);
+            this.healthbargreen = null;
+        }
+        
+        if(this.playernameplayer != null){
+            map.removeLayer(this.playernameplayer);
+            this.playernameplayer = null;
+        }
+
+   
+            
     }
 
 
@@ -295,10 +296,10 @@ getclass(){
                 
                 
 
-                this.healthbarredd = L.marker([ locationlat,locationlong],{icon: L.icon({
+                this.healthbarredd = L.marker([ 0,0],{icon: L.icon({
                     iconUrl: 'images/healthbarred.png',
-                                iconSize: [(this.health/100)*100, 10],
-                                iconAnchor: [50, 60]
+                                iconSize: [0, 0],
+                                iconAnchor: [0, 0]
                     
                 })
 
@@ -307,10 +308,10 @@ getclass(){
 
                 
 
-                this.healthbargreen = L.marker([ locationlat,locationlong],{icon: L.icon({
+                this.healthbargreen = L.marker([ 0,0],{icon: L.icon({
                     iconUrl: 'images/healthbargreen.png',
-                                iconSize: [(this.health/100)*100, 10],
-                                iconAnchor: [50, 60]
+                                iconSize: [0, 0],
+                                iconAnchor: [0, 0]
                     
                 })
 
