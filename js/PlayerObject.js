@@ -243,6 +243,15 @@ getclass(){
                 this.marker.setLatLng([ locationlat, locationlong]);
 
                 this.healthbarred.setLatLng([ locationlat, locationlong]);
+                
+                this.healthicongreen = L.icon({
+                    iconUrl: 'images/healthbargreen.png',
+                                iconSize: [(this.health/100)*100, 10],
+                                iconAnchor: [50, 60]
+                    
+                });
+                this.healthbargreen.setIcon(this.healthicongreen);
+
                 this.healthbargreen.setLatLng([ locationlat, locationlong]);
 
                 this.playernameplayer.setLatLng([ locationlat, locationlong]);
@@ -264,13 +273,7 @@ getclass(){
                 }
 
 
-                this.healthicongreen = L.icon({
-                    iconUrl: 'images/healthbargreen.png',
-                                iconSize: [(this.health/100)*100, 10],
-                                iconAnchor: [50, 60]
-                    
-                });
-                this.healthbargreen.setIcon(this.healthicongreen);
+                
 
             }
             else{
