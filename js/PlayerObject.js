@@ -224,6 +224,21 @@ getclass(){
 
                 this.playernameplayer.setLatLng([ locationlat, locationlong]);
                 
+                if(this.playername0 != null){
+                    this.playername0.setLatLng([ locationlat, locationlong]);
+                }
+                if(this.playername1 != null){
+                    this.playername1.setLatLng([ locationlat, locationlong]);
+                }
+                if(this.playername2 != null){
+                    this.playername2.setLatLng([ locationlat, locationlong]);
+                }
+                if(this.playername3 != null){
+                    this.playername3.setLatLng([ locationlat, locationlong]);
+                }
+                if(this.playername4 != null){
+                    this.playername4.setLatLng([ locationlat, locationlong]);
+                }
 
 
                 this.healthicongreen = L.icon({
@@ -264,6 +279,255 @@ getclass(){
 
                     //here will be the loop that loads the player number to icons (maybe have the offsets and icon references predetermined)
                     
+                    var numbers = this.id.split('');
+                    console.log(numbers);
+                    var i = 1;
+                    numbers.forEach(number => {
+                        if(number == 0){
+                            var number0 = L.marker([ locationlat,locationlong],{icon: L.icon({
+                                iconUrl: 'images/numbersred/playernamered0.png',
+                                iconSize: [18, 30],
+                                iconAnchor: [-18*i, 89]
+                            })
+                            });
+                            number0.addTo(pmap);
+                            if(i == 0){
+                                this.playername0 = number0;
+                            }
+                            if(i == 1){
+                                this.playername1 = number0;
+                            }
+                            if(i == 2){
+                                this.playername2 = number0;
+                            }
+                            if(i == 3){
+                                this.playername3 = number0;
+                            }
+                            if(i == 4){
+                                this.playername4 = number0;
+                            }
+                        }
+                        if(number == 1){
+                            var number0 = L.marker([ locationlat,locationlong],{icon: L.icon({
+                                iconUrl: 'images/numbersred/playernamered1.png',
+                                iconSize: [18, 30],
+                                iconAnchor: [-18*i, 89]
+                            })
+                            });
+                            number0.addTo(pmap);
+                            if(i == 0){
+                                this.playername0 = number0;
+                            }
+                            if(i == 1){
+                                this.playername1 = number0;
+                            }
+                            if(i == 2){
+                                this.playername2 = number0;
+                            }
+                            if(i == 3){
+                                this.playername3 = number0;
+                            }
+                            if(i == 4){
+                                this.playername4 = number0;
+                            }
+                        }
+                        if(number == 2){
+                            var number0 = L.marker([ locationlat,locationlong],{icon: L.icon({
+                                iconUrl: 'images/numbersred/playernamered2.png',
+                                iconSize: [18, 30],
+                                iconAnchor: [-18*i, 89]
+                            })
+                            });
+                            number0.addTo(pmap);
+                            if(i == 0){
+                                this.playername0 = number0;
+                            }
+                            if(i == 1){
+                                this.playername1 = number0;
+                            }
+                            if(i == 2){
+                                this.playername2 = number0;
+                            }
+                            if(i == 3){
+                                this.playername3 = number0;
+                            }
+                            if(i == 4){
+                                this.playername4 = number0;
+                            }
+                        }
+                        if(number == 3){
+                            var number0 = L.marker([ locationlat,locationlong],{icon: L.icon({
+                                iconUrl: 'images/numbersred/playernamered3.png',
+                                iconSize: [18, 30],
+                                iconAnchor: [-18*i, 89]
+                            })
+                            });
+                            number0.addTo(pmap);
+                            if(i == 0){
+                                this.playername0 = number0;
+                            }
+                            if(i == 1){
+                                this.playername1 = number0;
+                            }
+                            if(i == 2){
+                                this.playername2 = number0;
+                            }
+                            if(i == 3){
+                                this.playername3 = number0;
+                            }
+                            if(i == 4){
+                                this.playername4 = number0;
+                            }
+                        }
+                        if(number == 4){
+                            var number0 = L.marker([ locationlat,locationlong],{icon: L.icon({
+                                iconUrl: 'images/numbersred/playernamered4.png',
+                                iconSize: [18, 30],
+                                iconAnchor: [-18*i, 89]
+                            })
+                            });
+                            number0.addTo(pmap);
+                            if(i == 0){
+                                this.playername0 = number0;
+                            }
+                            if(i == 1){
+                                this.playername1 = number0;
+                            }
+                            if(i == 2){
+                                this.playername2 = number0;
+                            }
+                            if(i == 3){
+                                this.playername3 = number0;
+                            }
+                            if(i == 4){
+                                this.playername4 = number0;
+                            }
+                        }
+                        if(number == 5){
+                            var number0 = L.marker([ locationlat,locationlong],{icon: L.icon({
+                                iconUrl: 'images/numbersred/playernamered5.png',
+                                iconSize: [18, 30],
+                                iconAnchor: [-18*i, 89]
+                            })
+                            });
+                            number0.addTo(pmap);
+                            if(i == 0){
+                                this.playername0 = number0;
+                            }
+                            if(i == 1){
+                                this.playername1 = number0;
+                            }
+                            if(i == 2){
+                                this.playername2 = number0;
+                            }
+                            if(i == 3){
+                                this.playername3 = number0;
+                            }
+                            if(i == 4){
+                                this.playername4 = number0;
+                            }
+                        }
+                        if(number == 6){
+                            var number0 = L.marker([ locationlat,locationlong],{icon: L.icon({
+                                iconUrl: 'images/numbersred/playernamered6.png',
+                                iconSize: [18, 30],
+                                iconAnchor: [-18*i, 89]
+                            })
+                            });
+                            number0.addTo(pmap);
+                            if(i == 0){
+                                this.playername0 = number0;
+                            }
+                            if(i == 1){
+                                this.playername1 = number0;
+                            }
+                            if(i == 2){
+                                this.playername2 = number0;
+                            }
+                            if(i == 3){
+                                this.playername3 = number0;
+                            }
+                            if(i == 4){
+                                this.playername4 = number0;
+                            }
+                        }
+                        if(number == 7){
+                            var number0 = L.marker([ locationlat,locationlong],{icon: L.icon({
+                                iconUrl: 'images/numbersred/playernamered7.png',
+                                iconSize: [18, 30],
+                                iconAnchor: [-18*i, 89]
+                            })
+                            });
+                            number0.addTo(pmap);
+                            if(i == 0){
+                                this.playername0 = number0;
+                            }
+                            if(i == 1){
+                                this.playername1 = number0;
+                            }
+                            if(i == 2){
+                                this.playername2 = number0;
+                            }
+                            if(i == 3){
+                                this.playername3 = number0;
+                            }
+                            if(i == 4){
+                                this.playername4 = number0;
+                            }
+                        }
+                        if(number == 8){
+                            var number0 = L.marker([ locationlat,locationlong],{icon: L.icon({
+                                iconUrl: 'images/numbersred/playernamered8.png',
+                                iconSize: [18, 30],
+                                iconAnchor: [-18*i, 89]
+                            })
+                            });
+                            number0.addTo(pmap);
+                            if(i == 0){
+                                this.playername0 = number0;
+                            }
+                            if(i == 1){
+                                this.playername1 = number0;
+                            }
+                            if(i == 2){
+                                this.playername2 = number0;
+                            }
+                            if(i == 3){
+                                this.playername3 = number0;
+                            }
+                            if(i == 4){
+                                this.playername4 = number0;
+                            }
+                        }
+                        if(number == 9){
+                            var number0 = L.marker([ locationlat,locationlong],{icon: L.icon({
+                                iconUrl: 'images/numbersred/playernamered9.png',
+                                iconSize: [18, 30],
+                                iconAnchor: [-18*i, 89]
+                            })
+                            });
+                            number0.addTo(pmap);
+                            if(i == 0){
+                                this.playername0 = number0;
+                            }
+                            if(i == 1){
+                                this.playername1 = number0;
+                            }
+                            if(i == 2){
+                                this.playername2 = number0;
+                            }
+                            if(i == 3){
+                                this.playername3 = number0;
+                            }
+                            if(i == 4){
+                                this.playername4 = number0;
+                            }
+                        }
+
+                       i++;
+                      });
+
+
 
 
                 }
@@ -288,6 +552,256 @@ getclass(){
                     var playernameplayer2 = L.marker([ locationlat,locationlong],{icon: this.playernameblue});
                     playernameplayer2.addTo(pmap);
                     this.playernameplayer = playernameplayer2;
+
+
+
+                    var numbers = this.id.split('');
+                    console.log(numbers);
+                    var i = 1;
+                    numbers.forEach(number => {
+                        if(number == 0){
+                            var number0 = L.marker([ locationlat,locationlong],{icon: L.icon({
+                                iconUrl: 'images/numbersblue/playernameblue0.png',
+                                iconSize: [18, 30],
+                                iconAnchor: [-18*i, 89]
+                            })
+                            });
+                            number0.addTo(pmap);
+                            if(i == 0){
+                                this.playername0 = number0;
+                            }
+                            if(i == 1){
+                                this.playername1 = number0;
+                            }
+                            if(i == 2){
+                                this.playername2 = number0;
+                            }
+                            if(i == 3){
+                                this.playername3 = number0;
+                            }
+                            if(i == 4){
+                                this.playername4 = number0;
+                            }
+                        }
+                        if(number == 1){
+                            var number0 = L.marker([ locationlat,locationlong],{icon: L.icon({
+                                iconUrl: 'images/numbersblue/playernameblue1.png',
+                                iconSize: [18, 30],
+                                iconAnchor: [-18*i, 89]
+                            })
+                            });
+                            number0.addTo(pmap);
+                            if(i == 0){
+                                this.playername0 = number0;
+                            }
+                            if(i == 1){
+                                this.playername1 = number0;
+                            }
+                            if(i == 2){
+                                this.playername2 = number0;
+                            }
+                            if(i == 3){
+                                this.playername3 = number0;
+                            }
+                            if(i == 4){
+                                this.playername4 = number0;
+                            }
+                        }
+                        if(number == 2){
+                            var number0 = L.marker([ locationlat,locationlong],{icon: L.icon({
+                                iconUrl: 'images/numbersblue/playernameblue2.png',
+                                iconSize: [18, 30],
+                                iconAnchor: [-18*i, 89]
+                            })
+                            });
+                            number0.addTo(pmap);
+                            if(i == 0){
+                                this.playername0 = number0;
+                            }
+                            if(i == 1){
+                                this.playername1 = number0;
+                            }
+                            if(i == 2){
+                                this.playername2 = number0;
+                            }
+                            if(i == 3){
+                                this.playername3 = number0;
+                            }
+                            if(i == 4){
+                                this.playername4 = number0;
+                            }
+                        }
+                        if(number == 3){
+                            var number0 = L.marker([ locationlat,locationlong],{icon: L.icon({
+                                iconUrl: 'images/numbersblue/playernameblue3.png',
+                                iconSize: [18, 30],
+                                iconAnchor: [-18*i, 89]
+                            })
+                            });
+                            number0.addTo(pmap);
+                            if(i == 0){
+                                this.playername0 = number0;
+                            }
+                            if(i == 1){
+                                this.playername1 = number0;
+                            }
+                            if(i == 2){
+                                this.playername2 = number0;
+                            }
+                            if(i == 3){
+                                this.playername3 = number0;
+                            }
+                            if(i == 4){
+                                this.playername4 = number0;
+                            }
+                        }
+                        if(number == 4){
+                            var number0 = L.marker([ locationlat,locationlong],{icon: L.icon({
+                                iconUrl: 'images/numbersblue/playernameblue4.png',
+                                iconSize: [18, 30],
+                                iconAnchor: [-18*i, 89]
+                            })
+                            });
+                            number0.addTo(pmap);
+                            if(i == 0){
+                                this.playername0 = number0;
+                            }
+                            if(i == 1){
+                                this.playername1 = number0;
+                            }
+                            if(i == 2){
+                                this.playername2 = number0;
+                            }
+                            if(i == 3){
+                                this.playername3 = number0;
+                            }
+                            if(i == 4){
+                                this.playername4 = number0;
+                            }
+                        }
+                        if(number == 5){
+                            var number0 = L.marker([ locationlat,locationlong],{icon: L.icon({
+                                iconUrl: 'images/numbersblue/playernameblue5.png',
+                                iconSize: [18, 30],
+                                iconAnchor: [-18*i, 89]
+                            })
+                            });
+                            number0.addTo(pmap);
+                            if(i == 0){
+                                this.playername0 = number0;
+                            }
+                            if(i == 1){
+                                this.playername1 = number0;
+                            }
+                            if(i == 2){
+                                this.playername2 = number0;
+                            }
+                            if(i == 3){
+                                this.playername3 = number0;
+                            }
+                            if(i == 4){
+                                this.playername4 = number0;
+                            }
+                        }
+                        if(number == 6){
+                            var number0 = L.marker([ locationlat,locationlong],{icon: L.icon({
+                                iconUrl: 'images/numbersblue/playernameblue6.png',
+                                iconSize: [18, 30],
+                                iconAnchor: [-18*i, 89]
+                            })
+                            });
+                            number0.addTo(pmap);
+                            if(i == 0){
+                                this.playername0 = number0;
+                            }
+                            if(i == 1){
+                                this.playername1 = number0;
+                            }
+                            if(i == 2){
+                                this.playername2 = number0;
+                            }
+                            if(i == 3){
+                                this.playername3 = number0;
+                            }
+                            if(i == 4){
+                                this.playername4 = number0;
+                            }
+                        }
+                        if(number == 7){
+                            var number0 = L.marker([ locationlat,locationlong],{icon: L.icon({
+                                iconUrl: 'images/numbersblue/playernameblue7.png',
+                                iconSize: [18, 30],
+                                iconAnchor: [-18*i, 89]
+                            })
+                            });
+                            number0.addTo(pmap);
+                            if(i == 0){
+                                this.playername0 = number0;
+                            }
+                            if(i == 1){
+                                this.playername1 = number0;
+                            }
+                            if(i == 2){
+                                this.playername2 = number0;
+                            }
+                            if(i == 3){
+                                this.playername3 = number0;
+                            }
+                            if(i == 4){
+                                this.playername4 = number0;
+                            }
+                        }
+                        if(number == 8){
+                            var number0 = L.marker([ locationlat,locationlong],{icon: L.icon({
+                                iconUrl: 'images/numbersblue/playernameblue8.png',
+                                iconSize: [18, 30],
+                                iconAnchor: [-18*i, 89]
+                            })
+                            });
+                            number0.addTo(pmap);
+                            if(i == 0){
+                                this.playername0 = number0;
+                            }
+                            if(i == 1){
+                                this.playername1 = number0;
+                            }
+                            if(i == 2){
+                                this.playername2 = number0;
+                            }
+                            if(i == 3){
+                                this.playername3 = number0;
+                            }
+                            if(i == 4){
+                                this.playername4 = number0;
+                            }
+                        }
+                        if(number == 9){
+                            var number0 = L.marker([ locationlat,locationlong],{icon: L.icon({
+                                iconUrl: 'images/numbersblue/playernameblue9.png',
+                                iconSize: [18, 30],
+                                iconAnchor: [-18*i, 89]
+                            })
+                            });
+                            number0.addTo(pmap);
+                            if(i == 0){
+                                this.playername0 = number0;
+                            }
+                            if(i == 1){
+                                this.playername1 = number0;
+                            }
+                            if(i == 2){
+                                this.playername2 = number0;
+                            }
+                            if(i == 3){
+                                this.playername3 = number0;
+                            }
+                            if(i == 4){
+                                this.playername4 = number0;
+                            }
+                        }
+
+                       i++;
+                      });
                 }
                 
                 
