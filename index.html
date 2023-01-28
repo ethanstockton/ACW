@@ -445,6 +445,8 @@ function loadnewuserreturn(xhttp) {
                   userid = lines[1];
                  username = lines[2];
 
+                 setuserteam();
+
                  //console.log("userid:" + userid);
                  //console.log("username:" + username);
 
@@ -493,13 +495,13 @@ function setuserlocationreturn(xhttp) {
 function setredteam(){
   if(userteam == 0){
     userteam = 1;
-    setuserteam();
+    //setuserteam();
   } 
 }
 function setblueteam(){
   if(userteam == 0){
     userteam = 2;
-    setuserteam();
+    //setuserteam();
   }
 }
 
