@@ -155,21 +155,22 @@ function GameLoop() {
       
       if(userid == null){
         //check for a cookie
-        var returncookieuserid = "";// = getCookie("userid");
+        if(userteam != 0){
+          var returncookieuserid = "";// = getCookie("userid");
 
-        if(returncookieuserid == ""){
-          //then send a load command to the server to get a user id and a player name
-          if(newusertimeout > 5){
-            loadnewuser();
-            newusertimeout = 0;
+          if(returncookieuserid == ""){
+            //then send a load command to the server to get a user id and a player name
+            if(newusertimeout > 5){
+              loadnewuser();
+              newusertimeout = 0;
+            }
+            newusertimeout++;
+          
           }
-          newusertimeout++;
-          
-          
-        }
-        else{
-          userid = returncookieuserid;
-          username = "Player" . returncookieuserid;
+          else{
+            userid = returncookieuserid;
+            username = "Player" . returncookieuserid;
+          }
         }
 
         //the id and username should now be set either by the cookie or by getting a new userid
