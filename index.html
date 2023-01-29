@@ -13,8 +13,17 @@
         #map { height: 75vh; }
 
         .button{
-          height: 10vh;
+          height: 5vh;
           width: 40vw;
+}
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+  padding: 2px;
 }
 
 .leaflet-tooltip.redteam {
@@ -56,7 +65,8 @@
 
 <body style="background-color:rgb(0, 0, 0);">
 
-    <h1 style="text-align:center;">Capture The Campus</h1>
+    <h1 style="color:rgb(255, 255, 255);text-align:center;line-height: 0.2em;width:100%;font-weight: bold;
+    font-family:'Copperplate Gothic','Times New Roman', Times, serif;font-size:2.5vw;">Capture The Campus</h1>
 
     
 
@@ -65,18 +75,37 @@
 
 
     <!--  Main Site, to contain a welcome screen with an explination on how to play-->
-    <div id="mainpage" style="background-color:rgb(0, 0, 0);border: 5px solid #000000 ">
-      <input type="button" class="button" value="RedTeam" onclick="setredteam()">
-      <input type="button" class="button" value="BlueTeam" onclick="setblueteam()">
+    <div id="mainpage" style="background-color:rgb(0, 0, 0);border: 1px solid #000000 ">
+      
+      
+      <div class="row">
+		
+        <div class="column">
+          <input type="button" class="button" style="text-align:center;width:100%;line-height: 0.2em;font-weight: bold;
+          font-family:'Copperplate Gothic','Times New Roman', Times, serif;font-size:2.5vw;background-color:rgb(255, 0, 0);" value="RedTeam" onclick="setredteam()">
+          <div id="red" style="text-align:center;width:100%;font-weight: bold;
+          font-family:'Copperplate Gothic','Times New Roman', Times, serif;font-size:2.5vw;color:rgb(255, 0, 0);">Red : 0</div>
+        
+        </div>
+        <div class="column">
+          <input type="button" class="button" style="text-align:center;width:100%;line-height: 0.2em;font-weight: bold;
+          font-family:'Copperplate Gothic','Times New Roman', Times, serif;font-size:2.5vw;background-color:rgb(0, 0, 255);" value="BlueTeam" onclick="setblueteam()">
+          <div id="blue" style="text-align:center;width:100%;font-weight: bold;
+          font-family:'Copperplate Gothic','Times New Roman', Times, serif;font-size:2.5vw;color:rgb(0, 0, 255);">Blue : 0</div>
+          
        
-        <p id="demo" style="background-color:rgb(255, 255, 255);border: 5px solid #000000 "></p>
-
-
+        </div>
+      </div>
+        
+<!-- maybe try to have both on the same line and switch colours part way through -->
+        
+        
     </div>
     <!-- End Of Main Site -->
 
-    <div id="map"></div>
+    <div id="map"><p id="demo" style="background-color:rgb(255, 255, 255);border: 5px solid #000000 "></p></div>
 
+    
 
 </body>
  
@@ -84,7 +113,8 @@
     
     var map;
     
-
+    //for each team 
+//red.innerHTML = "Red : " + team red score;
     
 
     var x = document.getElementById("demo");
@@ -296,6 +326,18 @@ function loadgameinforeturn(xhttp) {
 
                     team.setteamscore(teamscore);
                     team.setteamcapcount(teamcapcount);
+
+                    if(id == 1){
+                        //red team
+                        red.innerHTML = "Red : " + teamscore;
+                        
+                    }
+                    if(id == 2){
+                        //blue team
+                        blue.innerHTML = "Blue : " + teamscore;
+                    }
+                    //document.getElementById("demo").style.color = "red"
+
                   }
                 });
 
