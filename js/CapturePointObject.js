@@ -106,7 +106,7 @@ updateview(){
             }
         }
         if(redradius != 0){
-            redopacity = 1;
+            redopacity = 0.5;
         }
         else{
             redopacity = 0;
@@ -120,7 +120,7 @@ updateview(){
             }
         }
         if(blueradius != 0){
-            blueopacity = 1;
+            blueopacity = 0.5;
         }
         else{
             blueopacity = 0;
