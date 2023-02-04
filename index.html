@@ -25,16 +25,85 @@ body {
   
 }
 
+.startmenu {
+  
+      position: fixed;
+      background: rgb(78, 78, 78);
+      
+      z-index: 99999;
+      height: 100vh;
+      width: 100vw;
+      top: 100%; 
+      
+      left: 0%;
+
+      transform: rotate(0deg) translateX(0px) translateY(-100%); 
+      transform-origin: 100% 0px;
+
+      opacity: 1;
+      text-align:center
+    }
+
+    .loadingscreen {
+  
+  position: fixed;
+  background: rgb(78, 78, 78);
+  
+  z-index: 99998;
+  height: 100vh;
+  width: 100vw;
+  top: 100%; 
+  
+  left: 0%;
+
+  transform: rotate(0deg) translateX(0px) translateY(-100%); 
+  transform-origin: 100% 0px;
+
+  opacity: 1;
+  text-align:center
+}
+
+    .button2{
+
+      
+			text-align: center;
+			float: center;
+			vertical-align: center;
+			z-index: 1;
+      
+          height: 20vh;
+          width: 20vw;
+}
+
+.center {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+    width: 90%;
+   font-size:5vw;
+   text-align: center;
+	
+}
+
+
 
         #map { height: 75vh; }
 
         .button{
           height: 5vh;
           width: 40vw;
-}
+        }
+
+        .button3{
+          height: 10vh;
+          width: 40vw;
+        }
 
 .row {
   display: flex;
+  /*height: 70vh;*/
+  width: 100vw;
 }
 
 .column {
@@ -84,8 +153,98 @@ body {
     <h1 style="color:rgb(255, 255, 255);text-align:center;line-height: 0.2em;width:100%;font-weight: bold;
     font-family:'Copperplate Gothic','Times New Roman', Times, serif;font-size:2.5vw;">Capture The Campus</h1>
 
-    
+    <div id="startmenuobj" class= "startmenu" >
+      
+      
 
+      <div class="row">
+		
+        <div class="column">
+          <br>
+		      <br>
+		      <br>
+          <br>
+		      <br>
+		      <br>
+          <br>
+		      <br>
+		      <br>
+		
+          <input id="notbutton" type="button" class="button3" style="text-align:center;width:80%;line-height: 0.2em;font-weight: bold;
+          font-family:'Copperplate Gothic','Times New Roman', Times, serif;font-size:2.5vw;background-color:rgb(184, 184, 184);" 
+          value="Team Select" onclick="">
+          
+          <br>
+		      <br>
+		      <br>
+
+          <input id="redbutton" type="button" class="button3" style="text-align:center;width:70%;line-height: 0.2em;font-weight: bold;
+          font-family:'Copperplate Gothic','Times New Roman', Times, serif;font-size:2.5vw;background-color:rgb(255, 0, 0);" value="RedTeam" onclick="setredteam()">
+          
+          <br>
+		      <br>
+		      <br>
+
+          <input id="bluebutton" type="button" class="button3" style="text-align:center;width:70%;line-height: 0.2em;font-weight: bold;
+          font-family:'Copperplate Gothic','Times New Roman', Times, serif;font-size:2.5vw;background-color:rgb(4, 0, 255);" value="BlueTeam" onclick="setblueteam()">
+          
+
+        </div>
+
+        <div class="column">
+
+          <br>
+		      <br>
+		      <br>
+          <br>
+		      <br>
+		      <br>
+          <br>
+		      <br>
+		      <br>
+          
+          <div id="red2" style="text-align:center;width:100%;font-weight: bold;
+          font-family:'Copperplate Gothic','Times New Roman', Times, serif;font-size:2.5vw;color:rgb(255, 0, 0);">Red : 0</div>
+       
+        </div>
+      </div>
+
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+
+       <!--  have a start game button that applys the player settings,
+         and if none are selected then apply random
+         , also maybe once the button is pressed 
+      switch to a loading screen, then when the player is loaded show the map -->
+      <p><button 
+        id="closemenutest" type="button" class="button2" style="text-align:center;width:40%;line-height: 0.2em;font-weight: bold;
+        font-family:'Copperplate Gothic','Times New Roman', Times, serif;font-size:2.5vw;background-color:rgb(255, 0, 0);" 
+        value="Start Game" onclick="closestartmenu()">
+        </button></p>
+
+    </div>
+
+    <div id="loadingscreenobj" class= "loadingscreen" >
+      
+      
+
+       <!--  have a start game button that applys the player settings,
+         and if none are selected then apply random
+         , also maybe once the button is pressed 
+      switch to a loading screen, then when the player is loaded show the map -->
+      
+
+        <div  id="loadingtext" class="center" style="color:rgb(255, 255, 255);font-weight: bold;
+       font-family:'Copperplate Gothic','Times New Roman', Times, serif;font-size:2.5vw;">Loading...</div>
+
+    </div>
 
 
 
@@ -183,6 +342,7 @@ var username;
 var userlocationlatitude;
 var userlocationlongitude;
 //[position.coords.latitude, position.coords.longitude]
+var islocalplayerloaded = false;
 
 var userteam = 0;
 
@@ -257,7 +417,9 @@ function GameLoop() {
      loadgameinfo();
 
 
-
+    if(islocalplayerloaded == true){
+      closeloadingscreen();
+    }
 
 //remove all the users from the map that are not on the location list
 
@@ -463,6 +625,7 @@ function loadgameinforeturn(xhttp) {
                 if(id == userid){
                       //then this is the local player
                       newuser.setlocalplayer(true);
+                      islocalplayerloaded = true;
                 }
 
                 users.push(newuser);
@@ -583,7 +746,21 @@ function setuserteam2(xhttp) {
 
 
 
+  function closestartmenu() {
 
+//document.getElementById("startmenuobj").style.opacity = 0;
+document.getElementById("startmenuobj").style.zindex = 0;
+document.getElementById("startmenuobj").style.left=100 +'%';
+
+}
+
+function closeloadingscreen() {
+
+//document.getElementById("startmenuobj").style.opacity = 0;
+document.getElementById("loadingscreenobj").style.zindex = 0;
+document.getElementById("loadingscreenobj").style.left=100 +'%';
+
+}
 
 
 </script>
