@@ -86,7 +86,20 @@ body {
 	
 }
 
-
+.lower1 {
+   position: absolute;
+   vertical-align: center;
+   bottom: 15%;
+   left: 10%;
+   right: 10%;
+   
+    width: 80%;
+    min-height: 5vh;
+    max-height: 5vh;
+   font-size:5vw;
+   text-align: center;
+	
+}
 
 
         #map { height: 85vh; }
@@ -99,19 +112,45 @@ body {
 
         .button3{
           height: 10vh;
+          
           width: 40vw;
+        }
+
+        .button4{
+          
+          padding-top: 2vh;
+          padding-bottom: 1vh;
         }
 
 .row {
   display: flex;
-  /*height: 70vh;*/
   width: 100vw;
 }
 
 .column {
   flex: 50%;
-  padding: 2px;
+  height: 0vh;
+  padding-bottom: 5vh;
+  
 }
+
+
+  .row2 {
+  display: flex;
+  /*height: 70vh;*/
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  width: 100vw;
+}
+
+.column2 {
+  flex: 50%;
+  height: 0vh;
+  padding-top: 5vh;
+  padding-bottom: 10vh;
+  
+}
+
 
 .leaflet-tooltip.redteam {
   background-color: transparent;
@@ -157,81 +196,59 @@ body {
 
     <div id="startmenuobj" class= "startmenu" >
       
-      
+      <h1 style="color:rgb(255, 255, 255);text-align:center;line-height: 0.4em;width:100%;font-weight: bold;
+    font-family:'Copperplate Gothic','Times New Roman', Times, serif;font-size:5vw;">Capture The Campus</h1>
 
-      <div class="row">
+      <div class="row2">
 		
-        <div class="column">
-          <br>
-		      <br>
-		      <br>
-          <br>
-		      <br>
-		      <br>
-          <br>
-		      <br>
-		      <br>
-		
-          <input id="notbutton" type="button" class="button3" style="text-align:center;width:80%;line-height: 0.2em;font-weight: bold;
-          font-family:'Copperplate Gothic','Times New Roman', Times, serif;font-size:2.5vw;background-color:rgb(184, 184, 184);" 
-          value="Team Select" onclick="">
+        <div class="column2">
           
-          <br>
-		      <br>
-		      <br>
-
+          <div class="button4" style="text-align:center;">
+            <input id="notbutton" type="button" class="button3" style="text-align:center;width:80%;line-height: 0.2em;font-weight: bold;
+            font-family:'Copperplate Gothic','Times New Roman', Times, serif;font-size:2.5vw;background-color:rgb(184, 184, 184);" 
+            value="Team Select" onclick="">
+          </div>
+          
+          <div class="button4" style="text-align:center;">
           <input id="redbutton" type="button" class="button3" style="text-align:center;width:70%;line-height: 0.2em;font-weight: bold;
           font-family:'Copperplate Gothic','Times New Roman', Times, serif;font-size:2.5vw;background-color:rgb(255, 0, 0);" value="RedTeam" onclick="setredteam()">
+           </div>
           
-          <br>
-		      <br>
-		      <br>
-
+          <div class="button4" style="text-align:center;">
           <input id="bluebutton" type="button" class="button3" style="text-align:center;width:70%;line-height: 0.2em;font-weight: bold;
           font-family:'Copperplate Gothic','Times New Roman', Times, serif;font-size:2.5vw;background-color:rgb(4, 0, 255);" value="BlueTeam" onclick="setblueteam()">
-          
+           </div>
 
         </div>
 
-        <div class="column">
+        <div class="column2">
 
-          <br>
-		      <br>
-		      <br>
-          <br>
-		      <br>
-		      <br>
-          <br>
-		      <br>
-		      <br>
+          
           
           <div id="red2" style="text-align:center;width:100%;font-weight: bold;
           font-family:'Copperplate Gothic','Times New Roman', Times, serif;font-size:2.5vw;color:rgb(255, 0, 0);">Red : 0</div>
        
         </div>
+      
       </div>
-
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-
-       <!--  have a start game button that applys the player settings,
+      
+      <div class="lower1">
+       <!-- 
+        
+        have a start game button that applys the player settings,
          and if none are selected then apply random
          , also maybe once the button is pressed 
       switch to a loading screen, then when the player is loaded show the map -->
-      <p>
+      
       
         <input id="bluebutton" type="button" class="button3" style="text-align:center;width:70%;line-height: 0.2em;font-weight: bold;
         font-family:'Copperplate Gothic','Times New Roman', Times, serif;font-size:2.5vw;background-color:rgb(184, 184, 184);color:rgb(0, 0, 0);"
          value="Start Game" onclick="closestartmenu()">
         
-      </p>
+      
+
+      </div>
+    
 
     </div>
 
@@ -292,8 +309,7 @@ body {
         </div>
       </div>
         
-<!-- maybe try to have both on the same line and switch colours part way through -->
-        
+
         
     </div>
     <!-- End Of Main Site -->
