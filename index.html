@@ -223,10 +223,26 @@ body {
 
         <div class="column2">
 
+          <div class="button4" style="text-align:center;">
+            <input id="notbutton2" type="button" class="button3" style="text-align:center;width:80%;line-height: 0.2em;font-weight: bold;
+            font-family:'Copperplate Gothic','Times New Roman', Times, serif;font-size:2.5vw;background-color:rgb(184, 184, 184);" 
+            value="Class Select" onclick="">
+          </div>
           
+          <div class="button4" style="text-align:center;">
+          <input id="knightbutton" type="button" class="button3" style="text-align:center;width:70%;line-height: 0.2em;font-weight: bold;
+          font-family:'Copperplate Gothic','Times New Roman', Times, serif;font-size:2.5vw;background-color:rgb(160, 160, 160);" value="Knight Class" onclick="setclass(1)">
+           </div>
           
-          <div id="red2" style="text-align:center;width:100%;font-weight: bold;
-          font-family:'Copperplate Gothic','Times New Roman', Times, serif;font-size:2.5vw;color:rgb(255, 0, 0);">Red : 0</div>
+          <div class="button4" style="text-align:center;">
+          <input id="archerbutton" type="button" class="button3" style="text-align:center;width:70%;line-height: 0.2em;font-weight: bold;
+          font-family:'Copperplate Gothic','Times New Roman', Times, serif;font-size:2.5vw;background-color:rgb(146, 58, 0);" value="Archer Class" onclick="setclass(2)">
+           </div>
+
+           <div class="button4" style="text-align:center;">
+            <input id="healerbutton" type="button" class="button3" style="text-align:center;width:70%;line-height: 0.2em;font-weight: bold;
+            font-family:'Copperplate Gothic','Times New Roman', Times, serif;font-size:2.5vw;background-color:rgb(0, 180, 15);" value="Healer Class" onclick="setclass(3)">
+             </div>
        
         </div>
       
@@ -382,6 +398,8 @@ var islocalplayerloaded = false;
 
 var userteam = 0;
 
+var userclass = 0;
+var userprefsset = 0;
 var newusertimeout = 6;
 
 
@@ -397,7 +415,7 @@ function GameLoop() {
       
       if(userid == null){
         //check for a cookie
-        if(userteam != 0){
+        if(userprefsset != 0){
           var returncookieuserid = "";// = getCookie("userid");
 
           if(returncookieuserid == ""){
@@ -434,7 +452,7 @@ function GameLoop() {
   //then do the external stuff
   //load the players onto the map
   //
-  if(userteam != 0){
+  if(userprefsset != 0){
     
 
     //set a check for each user, so that it can be seen as offline if not updated
@@ -752,16 +770,63 @@ function setredteam(){
   if(userteam == 0){
     userteam = 1;
     //setuserteam();
-    document.getElementById("redbutton").style.color = "white"
+    document.getElementById("redbutton").style.color = "white";
   } 
+  else{
+    userteam = 1;
+    document.getElementById("redbutton").style.color = "white";
+    document.getElementById("bluebutton").style.color = "black";
+  }
 }
 function setblueteam(){
   if(userteam == 0){
     userteam = 2;
     //setuserteam();
-    document.getElementById("bluebutton").style.color = "white"
+    document.getElementById("bluebutton").style.color = "white";
+  }
+  else{
+    userteam = 2;
+    document.getElementById("redbutton").style.color = "black";
+    document.getElementById("bluebutton").style.color = "white";
   }
 }
+
+function setclass(classset){
+  if(userclass == 0){
+    userclass = classset;
+    
+    if(classset == 1){
+      document.getElementById("knightbutton").style.color = "white";
+    }
+    if(classset == 2){
+      document.getElementById("archerbutton").style.color = "white";
+    }
+    if(classset == 3){
+      document.getElementById("healerbutton").style.color = "white";
+    }
+    
+  }
+  else{
+    document.getElementById("knightbutton").style.color = "black";
+    document.getElementById("archerbutton").style.color = "black";
+    document.getElementById("healerbutton").style.color = "black";
+
+    userclass = classset;
+
+    if(classset == 1){
+      document.getElementById("knightbutton").style.color = "white";
+    }
+    if(classset == 2){
+      document.getElementById("archerbutton").style.color = "white";
+    }
+    if(classset == 3){
+      document.getElementById("healerbutton").style.color = "white";
+    }
+
+
+  }
+}
+
 
 
     function setuserteam() {
@@ -782,11 +847,20 @@ function setuserteam2(xhttp) {
 
 
   function closestartmenu() {
+  if(userteam != 0 && userclass != 0){
 
-//document.getElementById("startmenuobj").style.opacity = 0;
-document.getElementById("startmenuobj").style.zindex = 0;
-document.getElementById("startmenuobj").style.left=100 +'%';
+    userprefsset = 1;
 
+  }
+
+  if(userprefsset == 1){
+
+
+    //document.getElementById("startmenuobj").style.opacity = 0;
+    document.getElementById("startmenuobj").style.zindex = 0;
+    document.getElementById("startmenuobj").style.left=100 +'%';
+
+  }
 }
 
 function closeloadingscreen() {
