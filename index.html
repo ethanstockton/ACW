@@ -448,6 +448,24 @@ function GameLoop() {
 
 
   }
+
+  if(1 == 1){
+      if(islocalplayerloadedi == 1){
+        //document.getElementById("loadingtext").style.zindex = 0;
+        loadingtext.innerHTML = "Loading.";
+      }
+      if(islocalplayerloadedi == 2){
+        loadingtext.innerHTML = "Loading..";
+      }
+      if(islocalplayerloadedi == 3){
+        loadingtext.innerHTML = "Loading...";
+      }
+      if(islocalplayerloadedi >= 4){
+        islocalplayerloadedi = 0;
+      }
+
+      islocalplayerloadedi++;
+  }
   
 
   //then do the external stuff
@@ -477,21 +495,7 @@ function GameLoop() {
     }
     else{
       
-      if(islocalplayerloadedi == 1){
-        //document.getElementById("loadingtext").style.zindex = 0;
-        loadingtext.innerHTML = "Loading.";
-      }
-      if(islocalplayerloadedi == 2){
-        loadingtext.innerHTML = "Loading..";
-      }
-      if(islocalplayerloadedi == 3){
-        loadingtext.innerHTML = "Loading...";
-      }
-      if(islocalplayerloadedi >= 4){
-        islocalplayerloadedi = 0;
-      }
-
-      islocalplayerloadedi++;
+      
     }
 
 //remove all the users from the map that are not on the location list
