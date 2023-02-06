@@ -423,7 +423,7 @@ function AnimationLoop(){
       islocalplayerloadedi++;
 
   }
-  
+
 }
 
 function GameLoop() {
@@ -748,6 +748,8 @@ function loadnewuserreturn(xhttp) {
                  username = lines[2];
 
                  setuserteam();
+                 
+                 setuserclass();
 
                  //console.log("userid:" + userid);
                  //console.log("username:" + username);
@@ -871,6 +873,19 @@ function setuserteam2(xhttp) {
 
 	}
 
+  function setuserclass() {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {setuserclass2(this);}
+  xhttp.open("POST", 'https://uniserver.ethanrws.com/updateclass.php?id=' + userid + '&class=' + userclass +'');
+  xhttp.send();
+}
+
+function setuserclass2(xhttp) {
+	    let response = xhttp.response;
+
+      //console.log(response);
+
+	}
 
 
 
