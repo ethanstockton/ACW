@@ -388,6 +388,9 @@ body {
 //game loop 
 setInterval(GameLoop, 1000);
 
+//run it every 500ms
+setInterval(AnimationLoop, 500);
+
 var userid;
 var username;
 //var userlocation;
@@ -395,7 +398,7 @@ var userlocationlatitude;
 var userlocationlongitude;
 //[position.coords.latitude, position.coords.longitude]
 var islocalplayerloaded = false;
-var islocalplayerloadedi = 0;
+var islocalplayerloadedi = 1;
 
 var userteam = 0;
 
@@ -403,7 +406,25 @@ var userclass = 0;
 var userprefsset = 0;
 var newusertimeout = 6;
 
+function AnimationLoop(){
 
+  if(1 == 1){
+      if(islocalplayerloadedi == 1){
+        //document.getElementById("loadingtext").style.zindex = 0;
+        loadingtext.innerHTML = "Loading.";
+      }
+      if(islocalplayerloadedi == 2){
+        loadingtext.innerHTML = "Loading..";
+      }
+      if(islocalplayerloadedi == 3){
+        loadingtext.innerHTML = "Loading...";
+        islocalplayerloadedi = 0;
+      }
+      islocalplayerloadedi++;
+
+  }
+  
+}
 
 function GameLoop() {
 
@@ -449,23 +470,7 @@ function GameLoop() {
 
   }
 
-  if(1 == 1){
-      if(islocalplayerloadedi == 1){
-        //document.getElementById("loadingtext").style.zindex = 0;
-        loadingtext.innerHTML = "Loading.";
-      }
-      if(islocalplayerloadedi == 2){
-        loadingtext.innerHTML = "Loading..";
-      }
-      if(islocalplayerloadedi == 3){
-        loadingtext.innerHTML = "Loading...";
-      }
-      if(islocalplayerloadedi >= 4){
-        islocalplayerloadedi = 0;
-      }
-
-      islocalplayerloadedi++;
-  }
+  
   
 
   //then do the external stuff
