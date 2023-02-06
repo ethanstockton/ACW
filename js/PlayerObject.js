@@ -16,8 +16,11 @@ class PlayerObject {
         this.class = 0;
 
         this.healthbargreen;
+        this.healthbargrey;
         this.healthbarred;
         this.healthbarredd;
+
+        this.greymarker;
 
         this.playernameplayer;
 
@@ -25,7 +28,20 @@ class PlayerObject {
 
     }
 
-   
+    greyicon = L.icon({
+        iconUrl: 'images/marker-icon-grey.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 40],
+        popupAnchor: [0, -20],
+        
+    });
+    greyiconlocal = L.icon({
+        iconUrl: 'images/marker-icon-grey-local.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 40],
+        popupAnchor: [0, -20],
+        
+    });
 
     redteamicon = L.icon({
         iconUrl: 'images/marker-icon-teamred.png',
@@ -162,6 +178,16 @@ getclass(){
             map.removeLayer(this.healthbargreen);
             this.healthbargreen = null;
         }
+
+        if(this.healthbargrey != null){
+            map.removeLayer(this.healthbargrey);
+            this.healthbargrey = null;
+        }
+
+        if(this.greymarker != null){
+            map.removeLayer(this.greymarker);
+            this.greymarker = null;
+        }
         
         if(this.playernameplayer != null){
             map.removeLayer(this.playernameplayer);
@@ -210,6 +236,71 @@ getclass(){
                     
                 })
                 );
+
+
+                this.healthbargrey.setLatLng([ locationlat, locationlong]);
+
+                var showgrey = 0;
+                if(this.health <= 0){
+                    showgrey = 100;
+                }
+                else{
+                    showgrey = 0;
+                }
+                this.healthbargrey.setIcon(L.icon({
+                    iconUrl: 'images/healthbargrey.png',
+                                iconSize: [showgrey, 10],
+                                iconAnchor: [50, 60]
+                    
+                })
+                );
+
+
+                this.greymarker.setLatLng([ locationlat, locationlong]);
+
+                if(this.health <= 0){
+                    if(this.localplayer == true){
+                        /*
+                        iconSize: [25, 41],
+                            iconAnchor: [12, 40]
+                        */
+                        this.greymarker.setIcon(L.icon({
+                            iconUrl: 'images/marker-icon-grey-local.png',
+                            iconSize: [25, 41],
+                            iconAnchor: [12, 40]
+                        })
+                        );
+                    }
+                    else{
+                        this.greymarker.setIcon(L.icon({
+                            iconUrl: 'images/marker-icon-grey-local.png',
+                            iconSize: [25, 41],
+                            iconAnchor: [12, 40]
+                        })
+                        );
+                    }
+                }
+                else{
+                    if(this.localplayer == true){
+                        this.greymarker.setIcon(L.icon({
+                            iconUrl: 'images/marker-icon-grey-local.png',
+                            iconSize: [0, 0],
+                            iconAnchor: [0, 0]
+                        })
+                        );
+                    }
+                    else{
+                        this.greymarker.setIcon(L.icon({
+                            iconUrl: 'images/marker-icon-grey.png',
+                            iconSize: [0, 0],
+                            iconAnchor: [0, 0]
+                        })
+                        );
+                    }
+                }
+                
+
+                
 
                 this.playernameplayer.setLatLng([ locationlat, locationlong]);
                 
@@ -294,30 +385,44 @@ getclass(){
 
                 }
                 
-                
-
-                this.healthbarredd = L.marker([ 0,0],{icon: L.icon({
+                this.healthbarredd = L.marker([ locationlat,locationlong],{icon: L.icon({
                     iconUrl: 'images/healthbarred.png',
-                                iconSize: [0, 0],
-                                iconAnchor: [0, 0]
+                    iconSize: [100, 10],
+                    iconAnchor: [50, 60]
                     
                 })
-
                 }).addTo(pmap);
                 
 
-                
-
-                this.healthbargreen = L.marker([ 0,0],{icon: L.icon({
+                this.healthbargreen = L.marker([ locationlat,locationlong],{icon: L.icon({
                     iconUrl: 'images/healthbargreen.png',
-                                iconSize: [0, 0],
-                                iconAnchor: [0, 0]
+                    iconSize: [(this.health/100)*100, 10],
+                    iconAnchor: [50, 60]
                     
                 })
-
                 }).addTo(pmap);
                
                 
+                this.healthbargrey = L.marker([ locationlat,locationlong],{icon: L.icon({
+                    iconUrl: 'images/healthbargrey.png',
+                                iconSize: [0, 0],
+                                iconAnchor: [0, 0]
+                    
+                })
+                }).addTo(pmap);
+
+
+
+                
+                    this.greymarker = L.marker([ locationlat,locationlong],{icon: L.icon({
+                        iconUrl: 'images/marker-icon-grey.png',
+                        iconSize: [0, 0],
+                        iconAnchor: [0, 0]
+                        
+                    })
+                    }).addTo(pmap);
+
+
                 
                 
 
