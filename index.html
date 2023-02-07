@@ -679,12 +679,11 @@ function loadgameinforeturn(xhttp) {
                 if(user.getid() == id){
                   playeralreadyloaded = 1;
                   user.resetcheck();
-                  user.setlocation(map, locationlat,locationlong);
                   user.setteam(playerteam);
-
                   user.sethealth(playerhealth);
                   user.setclass(playerclass);
-                  
+
+                  user.setlocation(map, locationlat,locationlong);
                 }
           
               });
@@ -695,10 +694,9 @@ function loadgameinforeturn(xhttp) {
 
                 var newuser = new PlayerObject(id,playername);
 
-               
                 newuser.setid(id);
                 newuser.setplayername(playername);
-                newuser.setlocation(map, locationlat,locationlong);
+                
                 newuser.setteam(playerteam);
                 newuser.sethealth(playerhealth);
                 newuser.setclass(playerclass);
@@ -708,6 +706,8 @@ function loadgameinforeturn(xhttp) {
                       newuser.setlocalplayer(true);
                       islocalplayerloaded = true;
                 }
+
+                newuser.setlocation(map, locationlat,locationlong);
 
                 users.push(newuser);
                 
