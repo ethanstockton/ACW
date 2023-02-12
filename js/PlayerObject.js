@@ -217,6 +217,8 @@ getclass(){
         setplayerabilitytarget(e.target.Id);
     }
 
+    //function(e) {setplayerabilitytarget(e.target.Id);}
+
 
     setlocation(pmap ,locationlat, locationlong){
         
@@ -252,7 +254,7 @@ getclass(){
                         var user2 = L.marker([ locationlat,locationlong],{icon: this.redteamicon});
                         //user2.bindPopup("<b>" + this.playername + "</b>").openPopup();
                         user2.Id = this.id;
-                        user2.addTo(pmap).on('click', this.onClick);
+                        user2.addTo(pmap).on('click', function(e) {setplayerabilitytarget(e.target.Id);});
 
                         this.marker = user2;
                     }
@@ -271,7 +273,7 @@ getclass(){
                         var user2 = L.marker([ locationlat,locationlong],{icon: this.blueteamicon});
                         //user2.bindPopup("<b>" + this.playername + "</b>").openPopup();
                         user2.Id = this.id;
-                        user2.addTo(pmap).on('click', this.onClick);
+                        user2.addTo(pmap).on('click', function(e) {setplayerabilitytarget(e.target.Id);});
 
                         this.marker = user2;
                     }
@@ -303,7 +305,7 @@ getclass(){
                             offset: [0, -70]
                          });
                          playernameplayer2.Id = this.id;
-                    playernameplayer2.addTo(pmap).on('click', this.onClick);
+                    playernameplayer2.addTo(pmap).on('click', function(e) {setplayerabilitytarget(e.target.Id);});
                     this.playernameplayer = playernameplayer2;
 
 
@@ -323,7 +325,7 @@ getclass(){
                             offset: [0, -70]
                          });
                          playernameplayer2.Id = this.id;
-                    playernameplayer2.addTo(pmap).on('click', this.onClick);
+                    playernameplayer2.addTo(pmap).on('click', function(e) {setplayerabilitytarget(e.target.Id);});
                     this.playernameplayer = playernameplayer2;
 
 
@@ -346,7 +348,7 @@ getclass(){
                 })
                 });
                 this.healthbarredmarker.Id = this.id;
-                this.healthbarredmarker.addTo(pmap).on('click', this.onClick);
+                this.healthbarredmarker.addTo(pmap).on('click', function(e) {setplayerabilitytarget(e.target.Id);});
                 
             }
 
@@ -374,7 +376,7 @@ getclass(){
                 })
                 });
                 this.healthbargreenmarker.Id = this.id;
-                this.healthbargreenmarker.addTo(pmap).on('click', this.onClick);
+                this.healthbargreenmarker.addTo(pmap).on('click', function(e) {setplayerabilitytarget(e.target.Id);});
                 
             }
 
@@ -409,7 +411,7 @@ getclass(){
                 })
                 });
                 this.healthbargreymarker.Id = this.id;
-                this.healthbargreymarker.addTo(pmap).on('click', this.onClick);
+                this.healthbargreymarker.addTo(pmap).on('click', function(e) {setplayerabilitytarget(e.target.Id);});
                 
             }
         
@@ -469,7 +471,7 @@ getclass(){
                 })
                 });
                 this.greymarker.Id = this.id;
-                this.greymarker.addTo(pmap).on('click', this.onClick);
+                this.greymarker.addTo(pmap).on('click', function(e) {setplayerabilitytarget(e.target.Id);});
                 
 
             }
