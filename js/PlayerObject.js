@@ -210,13 +210,11 @@ getclass(){
     //have an offset for it, so that it shows above the player icon
 
     onClick(e){
-       
-        
-            //set this as the target for the local players abilitys,
-            //call a function on the index.html, and pass this player id through
-        
-            console.log("Player Clicked on: Player" + e.target.Id);
-            setplayerabilitytarget(e.target.Id);
+        //set this as the target for the local players abilitys,
+        //call a function on the index.html, and pass this player id through
+    
+        //console.log("Player Clicked on: Player" + e.target.Id);
+        setplayerabilitytarget(e.target.Id);
     }
 
 
@@ -245,7 +243,7 @@ getclass(){
                     if(this.localplayer == true){
                         var user2 = L.marker([ locationlat,locationlong],{icon: this.redteamiconlocal});
                         //user2.bindPopup("<b>" + this.playername + "</b>").openPopup();
-
+                        user2.Id = this.id;
                         user2.addTo(pmap);
 
                         this.marker = user2;
@@ -264,7 +262,7 @@ getclass(){
                     if(this.localplayer == true){
                         var user2 = L.marker([ locationlat,locationlong],{icon: this.blueteamiconlocal});
                         //user2.bindPopup("<b>" + this.playername + "</b>").openPopup();
-
+                        user2.Id = this.id;
                         user2.addTo(pmap);
 
                         this.marker = user2;
@@ -346,8 +344,10 @@ getclass(){
                     iconAnchor: [50, 60]
                     
                 })
-                }).addTo(pmap).on('click', this.onClick);
+                });
                 this.healthbarredmarker.Id = this.id;
+                this.healthbarredmarker.addTo(pmap).on('click', this.onClick);
+                
             }
 
              //health bar front(green)
@@ -372,8 +372,10 @@ getclass(){
                     iconAnchor: [50, 60]
                     
                 })
-                }).addTo(pmap).on('click', this.onClick);
+                });
                 this.healthbargreenmarker.Id = this.id;
+                this.healthbargreenmarker.addTo(pmap).on('click', this.onClick);
+                
             }
 
              //health bar grey
@@ -405,8 +407,10 @@ getclass(){
                                 iconAnchor: [0, 0]
                     
                 })
-                }).addTo(pmap).on('click', this.onClick);
+                });
                 this.healthbargreymarker.Id = this.id;
+                this.healthbargreymarker.addTo(pmap).on('click', this.onClick);
+                
             }
         
             //grey marker
@@ -463,8 +467,10 @@ getclass(){
                     iconAnchor: [0, 0]
                     
                 })
-                }).addTo(pmap).on('click', this.onClick);
+                });
                 this.greymarker.Id = this.id;
+                this.greymarker.addTo(pmap).on('click', this.onClick);
+                
 
             }
 
