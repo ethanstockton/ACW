@@ -252,7 +252,7 @@ getclass(){
                         var user2 = L.marker([ locationlat,locationlong],{icon: this.redteamicon});
                         //user2.bindPopup("<b>" + this.playername + "</b>").openPopup();
                         user2.Id = this.id;
-                        user2.addTo(pmap).on('click', this.onClick(this.id));
+                        user2.addTo(pmap).on('click', this.onClick);
 
                         this.marker = user2;
                     }
