@@ -209,6 +209,15 @@ getclass(){
     //also needs to be updated to the location of the player when the player moves
     //have an offset for it, so that it shows above the player icon
 
+    onClick(e){
+       
+        
+            //set this as the target for the local players abilitys,
+            //call a function on the index.html, and pass this player id through
+        
+            console.log("Player Clicked on: Player" + e.target.Id);
+            setplayerabilitytarget(e.target.Id);
+    }
 
 
     setlocation(pmap ,locationlat, locationlong){
@@ -244,8 +253,8 @@ getclass(){
                     else{
                         var user2 = L.marker([ locationlat,locationlong],{icon: this.redteamicon});
                         //user2.bindPopup("<b>" + this.playername + "</b>").openPopup();
-
-                        user2.addTo(pmap);
+                        user2.Id = this.id;
+                        user2.addTo(pmap).on('click', this.onClick(this.id));
 
                         this.marker = user2;
                     }
@@ -263,8 +272,8 @@ getclass(){
                     else{
                         var user2 = L.marker([ locationlat,locationlong],{icon: this.blueteamicon});
                         //user2.bindPopup("<b>" + this.playername + "</b>").openPopup();
-
-                        user2.addTo(pmap);
+                        user2.Id = this.id;
+                        user2.addTo(pmap).on('click', this.onClick);
 
                         this.marker = user2;
                     }
@@ -295,7 +304,8 @@ getclass(){
                             className: "redteam",
                             offset: [0, -70]
                          });
-                    playernameplayer2.addTo(pmap);
+                         playernameplayer2.Id = this.id;
+                    playernameplayer2.addTo(pmap).on('click', this.onClick);
                     this.playernameplayer = playernameplayer2;
 
 
@@ -314,7 +324,8 @@ getclass(){
                             className: "blueteam",
                             offset: [0, -70]
                          });
-                    playernameplayer2.addTo(pmap);
+                         playernameplayer2.Id = this.id;
+                    playernameplayer2.addTo(pmap).on('click', this.onClick);
                     this.playernameplayer = playernameplayer2;
 
 
@@ -335,7 +346,8 @@ getclass(){
                     iconAnchor: [50, 60]
                     
                 })
-                }).addTo(pmap);
+                }).addTo(pmap).on('click', this.onClick);
+                this.healthbarredmarker.Id = this.id;
             }
 
              //health bar front(green)
@@ -360,7 +372,8 @@ getclass(){
                     iconAnchor: [50, 60]
                     
                 })
-                }).addTo(pmap);
+                }).addTo(pmap).on('click', this.onClick);
+                this.healthbargreenmarker.Id = this.id;
             }
 
              //health bar grey
@@ -392,7 +405,8 @@ getclass(){
                                 iconAnchor: [0, 0]
                     
                 })
-                }).addTo(pmap);
+                }).addTo(pmap).on('click', this.onClick);
+                this.healthbargreymarker.Id = this.id;
             }
         
             //grey marker
@@ -449,7 +463,8 @@ getclass(){
                     iconAnchor: [0, 0]
                     
                 })
-                }).addTo(pmap);
+                }).addTo(pmap).on('click', this.onClick);
+                this.greymarker.Id = this.id;
 
             }
 

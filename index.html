@@ -402,6 +402,12 @@ var islocalplayerloadedi = 1;
 
 var userteam = 0;
 
+//0 player selects the nearest target
+//1 auto selects the nearest target(not implemented)
+var userabilitytargetnearest = 0;
+
+var userabilitytarget = -1;
+
 var userclass = 0;
 var userprefsset = 0;
 var newusertimeout = 6;
@@ -858,6 +864,59 @@ function setclass(classset){
 }
 
 
+function setplayerabilitytarget(pTargetId){
+   //check to see if it is the local player, if it is do nothing
+  if(pTargetId != userid){
+      console.log("Player" + pTargetId);
+
+      
+      //set the variable and then set the target variable in the player object so that it will show as the target
+      //have it as a loop and reset any player that was previously the target
+      users.forEach(user => {
+        
+        //then this is the new target, so check to see if it is a valid target
+        if(user.getid() == pTargetId){
+
+            if(user.getteam() == userteam){
+                //then they are on the same team so check what kind of ability the player has
+                //ie if healing then it will only work for players on the same team
+                if(userclass == 3){
+                    //then its a healer so set the player as the target
+                    userabilitytarget = pTargetId;
+                }  
+            }
+            else{
+                if(userclass == 1){
+                    //then its a knight so set the player as the target
+                    userabilitytarget = pTargetId;
+                }
+                if(userclass == 2){
+                    //then its a archer so set the player as the target
+                    userabilitytarget = pTargetId;
+                }
+            }
+        }  
+      });  
+  }
+
+  //also then send the target info to the server(when loading have it set it to nearest player)
+  setusertarget();
+  
+}
+
+function setusertarget() {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {setusertarget2(this);}
+  xhttp.open("POST", 'https://uniserver.ethanrws.com/updateplayertarget.php?id=' + userid + '&target=' + userabilitytarget +'');
+  xhttp.send();
+}
+
+function setusertarget2(xhttp) {
+	    let response = xhttp.response;
+
+      //console.log(response);
+
+	}
 
     function setuserteam() {
   const xhttp = new XMLHttpRequest();
