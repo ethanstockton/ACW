@@ -339,50 +339,40 @@ body {
 <script>
     
     var map;
-    
-    //for each team 
-//red.innerHTML = "Red : " + team red score;
-    
 
-    var x = document.getElementById("demo");
+var x = document.getElementById("demo");
 
-    function getLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-      } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-      }
-    }
-    
-    function setLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPositionmap);
-      } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-      }
-    }
-    function showPositionmap(position) {
-      
+function setLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPositionmap);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+function showPositionmap(position) {
+  
+  if(isgpsactive == 0){
 
-      map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 19);
+    map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 19);
 
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
-      
-      }
-
-    setLocation();
-    
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      //maxZoom: 19,
+      maxZoom: 30,
+      maxNativeZoom: 19,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      }).addTo(map);
+  
+    isgpsactive = 1;
+  }
+}
 
 
-    var users = [];
-    //create js objects to hold the marker, and other player info, this can then be used(with a check loop) to see if the 
-    //player is still online, and so that the player can be moved
+var users = [];
+//create js objects to hold the marker, and other player info, this can then be used(with a check loop) to see if the 
+//player is still online, and so that the player can be moved
 
-    var teams = [];
-    var capturepoints = [];
+var teams = [];
+var capturepoints = [];
 
 //run every 1000 ms
 //game loop 
@@ -399,6 +389,8 @@ var userlocationlongitude;
 //[position.coords.latitude, position.coords.longitude]
 var islocalplayerloaded = false;
 var islocalplayerloadedi = 1;
+
+var isgpsactive = 0;
 
 var userteam = 0;
 
@@ -437,6 +429,15 @@ function GameLoop() {
 
   //first do the local player stuff
   if(1 == 1){
+    
+    if(isgpsactive == 0){
+      if(navigator.geolocation)
+      {
+        setLocation();
+      }
+    }
+
+    if(isgpsactive == 1){
 
       //first fetch the local players location
       getLocation2();
@@ -472,7 +473,7 @@ function GameLoop() {
         //setuserteam();
 
       }
-
+    }
 
   }
 
